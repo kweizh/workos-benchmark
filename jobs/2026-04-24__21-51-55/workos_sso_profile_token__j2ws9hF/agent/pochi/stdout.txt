@@ -1,0 +1,27 @@
+- Initializing MCP connections...
+You
+# Preserving your work Save a copy of files you create during this task to `/logs/artifacts/`. This directory is preserved after the run so outputs can be inspected. Organize with subdirectories if helpful (e.g., `/logs/artifacts/code/`, `/logs/artifacts/reports/`). The directory already exists and is writable. *** # WorkOS SSO Profile Token ## Background Integrate Single Sign-On (SSO) using WorkOS to fetch a user profile and access token. ## Requirements * Create a Node.js script `index.js` that uses the `@workos-inc/node` SDK. * The script should have a function `getSSOProfileAndToken(code)` that takes an authorization code. * Inside the function, call the WorkOS API to get the profile and token using the provided code and the `WORKOS_CLIENT_ID` environment variable. * The function must return the resulting profile and token object. ## Constraints * Project path: /home/user/app * Do not mock the WorkOS API. Use the real WorkOS API by relying on the `WORKOS_API_KEY` and `WORKOS_CLIENT_ID` environment variables.   
+
+Pochi
+💭 Thinking for 628 characters   
+💫 Executing mkdir -p /home/user/app && cd /home/user/app && npm init -y && npm install @workos-inc/node ✔ 
+💭 Thinking for 879 characters   
+💫 Executing cat /home/user/app/node_modules/@workos-inc/node/lib/sso/sso.js | grep -A 10 "getProfileAndToken" ✖ "Command exited with code 1"
+💭 Thinking for 163 characters   
+💫 Executing ls /home/user/app/node_modules/@workos-inc/node/lib/ ✔ 
+💭 Thinking for 261 characters   
+💫 Executing grep -A 10 -B 2 "getProfileAndToken" /home/user/app/node_modules/@workos-inc/node/lib/workos-C0YAqze0.d.cts ✔ 
+💭 Thinking for 568 characters   
+💫 Executing mkdir -p /logs/artifacts/code/ ✔ 
+✏️  Writing /home/user/app/index.js ✔ 
+💭 Thinking for 522 characters   
+✏️  Writing /home/user/app/index.js ✔ 
+💫 Executing cp /home/user/app/index.js /logs/artifacts/code/index.js ✔ 
+💭 Thinking for 563 characters   
+🎉 Task Completed
+I have created the Node.js script `index.js` in `/home/user/app` with the required `getSSOProfileAndToken` function. 
+
+The script initializes the WorkOS SDK utilizing the `WORKOS_API_KEY` environment variable and defines the `getSSOProfileAndToken(code)` function, which retrieves the profile and token using the provided authorization code and the `WORKOS_CLIENT_ID` environment variable. It then returns the resulting profile and token object.
+
+A copy of the implemented script has also been saved to `/logs/artifacts/code/index.js` for your records.   
+  

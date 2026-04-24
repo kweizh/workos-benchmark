@@ -1,0 +1,33 @@
+- Initializing MCP connections...
+You
+# Preserving your work Save a copy of files you create during this task to `/logs/artifacts/`. This directory is preserved after the run so outputs can be inspected. Organize with subdirectories if helpful (e.g., `/logs/artifacts/code/`, `/logs/artifacts/reports/`). The directory already exists and is writable. --- # WorkOS Admin Portal SSO Intent ## Background WorkOS provides an Admin Portal, a self-service UI for your customers to configure their own SSO and Directory Sync. You can generate a secure link to this portal using the WorkOS SDK. ## Requirements - Create a Node.js script `generate_portal_link.js` in `/home/user/project`. - The script should use the `@workos-inc/node` SDK to generate an Admin Portal link with the intent `sso`. - The script must take an organization ID as a command-line argument. - It must read the `WORKOS_API_KEY` from the environment. - The script should print the generated URL to standard output. - Initialize the project and install the necessary dependencies. ## Constraints - Project path: `/home/user/project` - Script path: `/home/user/project/generate_portal_link.js` - Do not mock the WorkOS API; use the real SDK.   
+
+Pochi
+💭 Thinking for 524 characters   
+💫 Executing mkdir -p /home/user/project /logs/artifacts && cd /home/user/project && npm init -y && npm install @workos-inc/node ✔ 
+💭 Thinking for 711 characters   
+✏️  Writing /home/user/project/generate_portal_link.js ✔ 
+💭 Thinking for 224 characters   
+💫 Executing cat /home/user/project/package.json ✔ 
+💭 Thinking for 322 characters   
+💫 Executing cp /home/user/project/generate_portal_link.js /logs/artifacts/generate_portal_link.js ✔ 
+💭 Thinking for 893 characters   
+💫 Executing WORKOS_API_KEY=sk_test_12345 node /home/user/project/generate_portal_link.js org_12345 ✖ "Command exited with code 1"
+💭 Thinking for 216 characters   
+🎉 Task Completed
+I have created the Node.js script `generate_portal_link.js` as requested. 
+
+Here is what was done:
+1. Initialized a Node.js project in `/home/user/project` and installed the `@workos-inc/node` SDK.
+2. Created the `generate_portal_link.js` script which:
+   - Reads the `WORKOS_API_KEY` from the environment.
+   - Takes the organization ID from the command line (`process.argv[2]`).
+   - Uses `workos.portal.generateLink({ organization, intent: 'sso' })` to generate the Admin Portal link.
+   - Prints the generated link to the standard output.
+3. Saved a copy of the script to `/logs/artifacts/generate_portal_link.js` to preserve the work.
+
+You can run the script using:
+```bash
+WORKOS_API_KEY=your_api_key node /home/user/project/generate_portal_link.js org_your_org_id
+```   
+  
