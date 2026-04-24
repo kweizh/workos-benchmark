@@ -1,0 +1,53 @@
+- Initializing MCP connections...
+You
+# Preserving your work Save a copy of files you create during this task to `/logs/artifacts/`. This directory is preserved after the run so outputs can be inspected. Organize with subdirectories if helpful (e.g., `/logs/artifacts/code/`, `/logs/artifacts/reports/`). The directory already exists and is writable. *** # WorkOS SSO Profile Token ## Background Integrate Single Sign-On (SSO) using WorkOS to fetch a user profile and access token. ## Requirements * Create a Node.js script `index.js` that uses the `@workos-inc/node` SDK. * The script should have a function `getSSOProfileAndToken(code)` that takes an authorization code. * Inside the function, call the WorkOS API to get the profile and token using the provided code and the `WORKOS_CLIENT_ID` environment variable. * The function must return the resulting profile and token object. ## Constraints * Project path: /home/user/app * Do not mock the WorkOS API. Use the real WorkOS API by relying on the `WORKOS_API_KEY` and `WORKOS_CLIENT_ID` environment variables.   
+
+Pochi
+💭 Thinking for 788 characters   
+📂 Listing files in /home/user/app ✔ 
+💭 Thinking for 236 characters   
+📖 Reading /home/user/app/package.json ✔ 
+💭 Thinking for 644 characters   
+📋 Updating todo list (2 items) ✔ 
+💭 Thinking for 271 characters   
+✏️  Writing /home/user/app/index.js ✔ 
+💭 Thinking for 280 characters   
+💫 Executing mkdir -p /logs/artifacts/code && cp /home/user/app/index.js /logs/artifacts/code/index.js ✔ 
+💭 Thinking for 279 characters   
+💫 Executing cp /home/user/app/package.json /logs/artifacts/code/package.json ✔ 
+💭 Thinking for 213 characters   
+📋 Updating todo list (2 items) ✔ 
+💭 Thinking for 111 characters   
+🎉 Task Completed
+I have created the `index.js` script in `/home/user/app` that integrates WorkOS SSO to fetch a user profile and access token.
+
+The script includes:
+- Initialization of the WorkOS SDK using `WORKOS_API_KEY`.
+- The `getSSOProfileAndToken(code)` function which uses `WORKOS_CLIENT_ID` and the provided authorization code to retrieve the profile and token.
+- Error handling for the API call.
+- Export of the function for use in other modules.
+
+A copy of the script and `package.json` has been saved to `/logs/artifacts/code/`.
+
+```javascript
+const { WorkOS } = require('@workos-inc/node');
+
+const workos = new WorkOS(process.env.WORKOS_API_KEY);
+const clientId = process.env.WORKOS_CLIENT_ID;
+
+async function getSSOProfileAndToken(code) {
+  try {
+    const profileAndToken = await workos.sso.getProfileAndToken({
+      code,
+      clientId,
+    });
+    return profileAndToken;
+  } catch (error) {
+    console.error('Error fetching SSO profile and token:', error);
+    throw error;
+  }
+}
+
+module.exports = { getSSOProfileAndToken };
+```   
+  

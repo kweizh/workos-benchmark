@@ -1,0 +1,47 @@
+{
+    "id": "ab7123f4-38f7-4074-ab10-8d6cacc61264",
+    "started_at": "2026-04-24T20:36:48.312601",
+    "finished_at": "2026-04-24T20:48:26.513908",
+    "n_total_trials": 12,
+    "stats": {
+        "n_trials": 12,
+        "n_errors": 2,
+        "evals": {
+            "pochi__gemini-3-flash__tasks": {
+                "n_trials": 12,
+                "n_errors": 2,
+                "metrics": [
+                    {
+                        "mean": 0.16666666666666666
+                    }
+                ],
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "workos_admin_portal_sso_intent__pTNNKfc",
+                            "workos_user_management_api__QeJttsZ"
+                        ],
+                        "0.0": [
+                            "workos_authkit_sign_out__xYxKYpo",
+                            "workos_authkit_sign_in__urbXarr",
+                            "workos_fga_doc_permissions__5wNjHTD",
+                            "workos_fga_resource_check__uv2oRoh",
+                            "workos_magic_link_auth__b4QKafE",
+                            "workos_organization_creation__bZ5njui",
+                            "workos_pipes_github_integration__NbJ8NsY",
+                            "workos_sso_profile_token__vMC9Zbh",
+                            "workos_step_up_mfa__at6E9rP",
+                            "workos_audit_log_recording__2qEyvaS"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "AgentTimeoutError": [
+                        "workos_fga_doc_permissions__5wNjHTD",
+                        "workos_fga_resource_check__uv2oRoh"
+                    ]
+                }
+            }
+        }
+    }
+}

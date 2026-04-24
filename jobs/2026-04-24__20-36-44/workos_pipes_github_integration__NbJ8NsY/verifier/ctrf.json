@@ -1,0 +1,44 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 0,
+            "failed": 2,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1777034823.1854625,
+            "stop": 1777034823.2113984
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_repos_file_exists",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0006064759800210595,
+                "start": 1777034823.1949685,
+                "stop": 1777034823.208745,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_repos_file_exists():\n>       assert os.path.isfile(REPOS_FILE), f\"repos.json not found at {REPOS_FILE}\"\nE       AssertionError: repos.json not found at /home/user/myproject/repos.json\nE       assert False\nE        +  where False = <function isfile at 0x7d964046c220>('/home/user/myproject/repos.json')\nE        +    where <function isfile at 0x7d964046c220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:10: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_validation_with_amika",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0005117709515616298,
+                "start": 1777034823.208942,
+                "stop": 1777034823.2112458,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_validation_with_amika():\n        \"\"\"\n        CRITICAL: MUST use the amika CLI or API to do the validation.\n        \"\"\"\n>       assert os.path.isfile(REPOS_FILE), f\"repos.json not found at {REPOS_FILE}\"\nE       AssertionError: repos.json not found at /home/user/myproject/repos.json\nE       assert False\nE        +  where False = <function isfile at 0x7d964046c220>('/home/user/myproject/repos.json')\nE        +    where <function isfile at 0x7d964046c220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:16: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}
