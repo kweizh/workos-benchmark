@@ -1,0 +1,5 @@
+{
+  "task_name": "workos_authkit_sign_out",
+  "task_description": "# WorkOS AuthKit Sign Out\n\n## Background\nYou have a Next.js application using WorkOS AuthKit for authentication. The sign-in flow is working, but the sign-out button on the homepage is currently non-functional.\n\n## Requirements\n- Update `src/app/page.tsx` to implement the sign-out functionality using `@workos-inc/authkit-nextjs`.\n- The sign-out button is already wrapped in a `<form>`. You need to add a server action to this form that calls the `signOut()` function from AuthKit.\n- Ensure the user is signed out when the button is clicked.\n\n## Constraints\n- Project path: `/home/user/app`\n- Do NOT change the visual appearance or text of the button.",
+  "truth": "The app must be running on port 3000. The `amika` CLI validation tool must successfully validate the sign-out functionality."
+}
