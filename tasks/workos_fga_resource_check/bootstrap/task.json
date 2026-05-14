@@ -1,5 +1,0 @@
-{
-  "task_name": "workos_fga_resource_check",
-  "task_description": "# WorkOS FGA Resource Check\n\n## Background\nYou need to verify if a specific user has access to a document using WorkOS Fine-Grained Authorization (FGA).\n\n## Requirements\n- Create a Node.js script at `/home/user/project/check.js`.\n- Initialize the WorkOS client using the `WORKOS_API_KEY` environment variable.\n- Use the SDK to check if a subject (type: `user`, id: `user_123`) has the `viewer` relation on a resource (type: `document`, id: `doc_456`).\n- Print `true` to the console if authorized, and `false` otherwise.\n\n## Constraints\n- Project path: `/home/user/project`\n- Use `@workos-inc/node` SDK.\n- Do not hardcode the API key.\n\n## Integrations\n- WorkOS",
-  "truth": "# Verification Plan\n\n## Setup\n1. `cd /home/user/project`\n2. `npm install`\n\n## Verification Steps\n1. Run `amika validate /home/user/project/check.js` to verify the script implementation.\n\n## Expected Results\n- The amika validation command should pass with exit code 0.\n\n## Integrations\n- WorkOS"
-}

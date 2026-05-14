@@ -1,0 +1,50 @@
+# Bulk User Export — Paginate WorkOS Users and Write a CSV
+
+## Background
+Ops and analytics teams frequently need to export the full membership of a WorkOS organization to a CSV file for downstream reporting, BI ingestion, or data warehouse syncs. The WorkOS User Management API exposes `listUsers`, but the endpoint returns a single page at a time and must be paginated using the `after` cursor (`list_metadata.after` in the API response, `listMetadata.after` in the `@workos-inc/node` SDK). Your job is to walk through every page of users in a WorkOS organization using the official `@workos-inc/node` SDK and persist the full set as a CSV file.
+
+## Requirements
+- Implement a Node.js script at `/home/user/myproject/index.js` (the project directory and `package.json` already exist; `@workos-inc/node` is already installed under `node_modules`).
+- The script MUST use the `@workos-inc/node` SDK to call `workos.userManagement.listUsers({ organizationId: <WORKOS_ORGANIZATION_ID>, limit: <small>, after: <cursor> })`.
+- The script MUST read its credentials from environment variables:
+  - `WORKOS_API_KEY` — WorkOS secret API key.
+  - `WORKOS_ORGANIZATION_ID` — Organization id to export users from.
+  - Do NOT hardcode either value.
+- The script MUST page through the listing using the `after` cursor returned in `listMetadata.after`. Use a small page size (`limit: 2`) so that pagination is exercised even on small datasets — the script must successfully iterate through at least 2 pages whenever the organization has more than 2 users.
+- The script MUST write a CSV file to `/home/user/myproject/users.csv` with:
+  - A header row exactly equal to `id,email,first_name,last_name,created_at` (no extra spaces, no BOM).
+  - One row per user returned by the API.
+  - Columns populated from the WorkOS user object: `id`, `email`, `firstName`, `lastName`, `createdAt`.
+  - Empty string for any field that is `null`/`undefined` (e.g., users without a first or last name).
+  - CSV values that contain `,`, `"`, or newline characters MUST be quoted with double quotes, with internal `"` doubled (RFC 4180).
+  - UTF-8 encoding, LF (`\n`) line endings, and a trailing newline after the last row.
+- The CSV row order MUST follow the iteration order of the paginated API responses (i.e., the order in which users are returned by `listUsers`).
+- The script MUST exit with code `0` on success and must be executable via `node /home/user/myproject/index.js` from `/home/user/myproject`.
+- Do NOT stub, mock, or hardcode the WorkOS API response. The script and verifier both call the live WorkOS API.
+
+## Implementation Guide
+1. `cd /home/user/myproject`.
+2. Create `index.js` that:
+   - `const { WorkOS } = require('@workos-inc/node');`
+   - `const workos = new WorkOS(process.env.WORKOS_API_KEY);`
+   - Initialize `let after = undefined;` and `const rows = [];`.
+   - Loop:
+     - `const page = await workos.userManagement.listUsers({ organizationId: process.env.WORKOS_ORGANIZATION_ID, limit: 2, after });`
+     - For each user in `page.data`, push `[user.id, user.email, user.firstName, user.lastName, user.createdAt]`.
+     - `const next = page.listMetadata && page.listMetadata.after;`
+     - If `next` is falsy, break out of the loop; otherwise `after = next;` and continue.
+   - Build the CSV string: header row first, then one row per user. Quote any field that contains `,`, `"`, or `\n`; escape internal `"` by doubling it. Treat `null`/`undefined` as empty string.
+   - Write the CSV to `/home/user/myproject/users.csv` with UTF-8 encoding and a trailing `\n`.
+3. `node index.js` from `/home/user/myproject` to generate `users.csv`.
+
+## Constraints
+- Project path: /home/user/myproject
+- Output file: /home/user/myproject/users.csv
+- Node.js entrypoint: /home/user/myproject/index.js
+- CSV header (exact): `id,email,first_name,last_name,created_at`
+- Page size: `limit: 2` (small enough to force pagination on any non-trivial dataset).
+- You MUST use the real `@workos-inc/node` SDK calling the live WorkOS API. Do NOT stub, mock, or hardcode the API response.
+- Required environment variables (already provided to the environment): `WORKOS_API_KEY`, `WORKOS_ORGANIZATION_ID`.
+
+## Integrations
+- WorkOS (User Management API, `@workos-inc/node` SDK)

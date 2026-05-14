@@ -1,0 +1,7 @@
+{
+  "library_name": "WorkOS",
+  "complexity_level": "multi-step sequential commands sets",
+  "deep_research_path": "plan.md",
+  "task_name": "roles_creation_and_assignment",
+  "output_dir": "scratchpad/pending-tasks/"
+}
