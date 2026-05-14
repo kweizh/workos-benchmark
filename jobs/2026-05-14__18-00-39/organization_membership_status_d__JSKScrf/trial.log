@@ -1,0 +1,87 @@
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash  && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo organization_membership_status_d__JSKScrf > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: mkdir -p /logs/artifacts
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Deactivate an Existing WorkOS Organization Membership
+
+## Background
+A WorkOS organization membership represents a user's relationship to a specific organization. Memberships have a `status` of `active`, `inactive`, or `pending`. The WorkOS Node SDK exposes `workos.userManagement.deactivateOrganizationMembership(id)` (which targets `PUT /user_management/organization_memberships/:id/deactivate`) to transition an `active` membership to `inactive`. In this task you will write a small Node.js script that deactivates a specific organization membership using the WorkOS Node SDK and persists the returned membership object to disk.
+
+## Requirements
+1. The project lives at `/home/user/myproject`. It already has `package.json` with the `@workos-inc/node` SDK installed.
+2. Implement a script at `/home/user/myproject/deactivate_membership.js` that:
+   - Reads `WORKOS_API_KEY` and `WORKOS_ORG_MEMBERSHIP_ID` from the process environment.
+   - Initializes the WorkOS client with `const workos = new WorkOS(process.env.WORKOS_API_KEY)`.
+   - Calls `workos.userManagement.deactivateOrganizationMembership(process.env.WORKOS_ORG_MEMBERSHIP_ID)`.
+   - Writes the JSON serialization of the returned organization membership object to `/home/user/myproject/membership.json` (pretty-printed with 2-space indentation).
+3. Run the script with `node deactivate_membership.js` so that `/home/user/myproject/membership.json` exists after the run.
+
+## Implementation Guide
+1. `cd /home/user/myproject`
+2. Create `deactivate_membership.js` using the WorkOS Node SDK (`@workos-inc/node`) as described above.
+3. Execute `node deactivate_membership.js`.
+4. Confirm `/home/user/myproject/membership.json` contains the deactivated membership (its `status` will be `"inactive"`).
+
+## Constraints
+- Project path: `/home/user/myproject`
+- Output file: `/home/user/myproject/membership.json`
+- Use the real WorkOS API. Do NOT mock the SDK or HTTP layer.
+- Use the SDK method `workos.userManagement.deactivateOrganizationMembership(id)` (not a hand-rolled HTTP call).
+- The script must be idempotent: deactivating an already-inactive membership is a no-op on the WorkOS side and must still succeed.
+
+## Integrations
+- WorkOS (real API key and a real organization membership id provided via env vars).
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured

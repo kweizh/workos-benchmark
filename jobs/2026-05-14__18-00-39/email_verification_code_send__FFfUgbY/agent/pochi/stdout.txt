@@ -1,0 +1,31 @@
+- Initializing MCP connections...
+You
+# Send a WorkOS Email Verification Code with the Node SDK ## Background WorkOS User Management supports an email verification flow in which the application asks WorkOS to email a one-time verification code to a user. In the `@workos-inc/node` SDK this is done via `workos.userManagement.sendVerificationEmail({ userId })`, which calls `POST /user_management/users/:id/email_verification/send` on the live WorkOS API and returns a `{ user }` payload describing the user that was emailed. In this task you must write a small Node.js script that triggers an email verification code for a specific user against the **live** WorkOS API using the real `@workos-inc/node` SDK and records the outcome in a log file. ## Requirements - Use the Node.js project already scaffolded at `/home/user/myproject` (`package.json` is present; you may extend it). - Add `@workos-inc/node` as a dependency and install it via `npm install`. - Implement `/home/user/myproject/index.js` that: 1. Reads `WORKOS_API_KEY` and `WORKOS_USER_ID` from `process.env`. Exit with a non-zero status if either is missing. 2. Instantiates `new WorkOS(process.env.WORKOS_API_KEY)`. 3. Calls `workos.userManagement.sendVerificationEmail({ userId: process.env.WORKOS_USER_ID })` against the **live** WorkOS API. Do **NOT** mock, stub, or fake the SDK or HTTP layer. 4. On success (the API returns a payload whose `user.id` starts with `user_`), append a single line to `/home/user/myproject/output.log` in the exact format: ``` SUCCESS user_id=<user.id> email=<user.email> ``` where `<user.id>` and `<user.email>` come from the SDK response. 5. On any error, append a line `FAILURE <error message>` to the log file and exit non-zero. - Run the script once (e.g. `node index.js`) so that `output.log` is created. ## Implementation Guide 1. `cd /home/user/myproject` 2. `npm install @workos-inc/node` 3. Create `index.js` with logic similar to: ```js const fs = require('fs'); const { WorkOS } = require('@workos-inc/node'); const apiKey = process.env.WORKOS_API_KEY; const userId = process.env.WORKOS_USER_ID; if (!apiKey || !userId) { console.error('Missing WORKOS_API_KEY or WORKOS_USER_ID'); process.exit(1); } const workos = new WorkOS(apiKey); const LOG = '/home/user/myproject/output.log'; (async () => { try { const response = await workos.userManagement.sendVerificationEmail({ userId }); const user = response.user || response; fs.appendFileSync(LOG, `SUCCESS user_id=${user.id} email=${user.email}\n`); } catch (err) { fs.appendFileSync(LOG, `FAILURE ${err.message}\n`); process.exit(1); } })(); ``` 4. `node index.js` ## Constraints - Project path: `/home/user/myproject` - Log file: `/home/user/myproject/output.log` - The script MUST use the real `@workos-inc/node` SDK and MUST call the live WorkOS API. Do NOT mock, stub, or fake the API call. - The script MUST read `WORKOS_API_KEY` and `WORKOS_USER_ID` from environment variables; do not hardcode either value. - The SDK call MUST use `userManagement.sendVerificationEmail({ userId })` exactly — do not roll your own HTTP request. ## Integrations - WorkOS User Management API (email verification via `sendVerificationEmail`)   
+
+Pochi
+📂 Listing files in /home/user/myproject ✔ 
+📋 Updating todo list (3 items) ✔ 
+📋 Updating todo list (3 items) ✔ 
+💫 Executing npm install @workos-inc/node ✔ 
+📋 Updating todo list (3 items) ✔ 
+✏️  Writing /home/user/myproject/index.js ✔ 
+📋 Updating todo list (3 items) ✔ 
+💫 Executing node index.js ✔ 
+📖 Reading /home/user/myproject/output.log ✔ 
+📋 Updating todo list (3 items) ✔ 
+🎉 Task Completed
+I have successfully implemented the WorkOS email verification script.
+
+1.  **Installed Dependency**: Added `@workos-inc/node` to the project at `/home/user/myproject`.
+2.  **Implemented `index.js`**: Created the script to:
+    *   Read `WORKOS_API_KEY` and `WORKOS_USER_ID` from environment variables.
+    *   Instantiate the WorkOS client.
+    *   Call `workos.userManagement.sendVerificationEmail({ userId })`.
+    *   Log the outcome to `/home/user/myproject/output.log` in the required format.
+3.  **Executed the Script**: Ran `node index.js`, which successfully triggered the email verification.
+
+The log file `/home/user/myproject/output.log` contains:
+```
+SUCCESS user_id=REDACTED email=user_1777039325343@example.com
+```   
+  

@@ -1,0 +1,89 @@
+downloading uv 0.9.7 x86_64-unknown-linux-gnu
+no checksums to verify
+installing to /root/.local/bin
+  uv
+  uvx
+everything's installed!
+
+To add $HOME/.local/bin to your PATH, either restart your shell or run:
+
+    source $HOME/.local/bin/env (sh, bash, zsh)
+    source $HOME/.local/bin/env.fish (fish)
+Downloading pygments (1.2MiB)
+ Downloading pygments
+Installed 7 packages in 13ms
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 9 items
+
+tests/test_final_state.py .......FF                                      [100%]
+
+=================================== FAILURES ===================================
+____________________ test_output_log_contains_success_entry ____________________
+
+    def test_output_log_contains_success_entry():
+        assert os.path.isfile(LOG_FILE), f"{LOG_FILE} must exist after the task is performed."
+        content = _read(LOG_FILE).strip()
+        assert content, f"{LOG_FILE} must not be empty."
+        matched = any(SUCCESS_LINE_RE.match(line) for line in content.splitlines())
+>       assert matched, (
+            "output.log must contain a line like "
+            "'SUCCESS magic_auth_id=magic_auth_<id> email=passwordless-otp-test@example.com'. "
+            f"Got:\n{content}"
+        )
+E       AssertionError: output.log must contain a line like 'SUCCESS magic_auth_id=magic_auth_<id> email=passwordless-otp-test@example.com'. Got:
+E         FAILURE Error: authentication_method_not_allowed
+E         Error Description: Magic Auth is disabled.
+E       assert False
+
+tests/test_final_state.py:106: AssertionError
+_____________________ test_script_can_call_live_workos_api _____________________
+
+    def test_script_can_call_live_workos_api():
+        """Run the script again against the live WorkOS API and confirm a new SUCCESS line."""
+        api_key = os.environ.get("WORKOS_API_KEY")
+        client_id = os.environ.get("WORKOS_CLIENT_ID")
+        if not api_key or not client_id:
+            pytest.skip("Verifier missing WORKOS_API_KEY / WORKOS_CLIENT_ID; skipping live API check.")
+    
+        before = ""
+        if os.path.isfile(LOG_FILE):
+            before = _read(LOG_FILE)
+    
+        env = os.environ.copy()
+        env["WORKOS_API_KEY"] = api_key
+        env["WORKOS_CLIENT_ID"] = client_id
+    
+        result = subprocess.run(
+            ["node", "index.js"],
+            cwd=PROJECT_DIR,
+            capture_output=True,
+            text=True,
+            env=env,
+            timeout=60,
+        )
+>       assert result.returncode == 0, (
+            f"Re-running `node index.js` against the live WorkOS API failed.\n"
+            f"stdout: {result.stdout}\nstderr: {result.stderr}"
+        )
+E       AssertionError: Re-running `node index.js` against the live WorkOS API failed.
+E         stdout: 
+E         stderr: 
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['node', 'index.js'], returncode=1, stdout='', stderr='').returncode
+
+tests/test_final_state.py:136: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_package_json_lists_workos_sdk
+PASSED tests/test_final_state.py::test_workos_sdk_installed_in_node_modules
+PASSED tests/test_final_state.py::test_index_js_exists
+PASSED tests/test_final_state.py::test_index_js_uses_real_workos_sdk
+PASSED tests/test_final_state.py::test_index_js_reads_env_vars
+PASSED tests/test_final_state.py::test_index_js_calls_create_magic_auth
+PASSED tests/test_final_state.py::test_index_js_does_not_mock_workos_api
+FAILED tests/test_final_state.py::test_output_log_contains_success_entry - As...
+FAILED tests/test_final_state.py::test_script_can_call_live_workos_api - Asse...
+========================= 2 failed, 7 passed in 0.87s ==========================

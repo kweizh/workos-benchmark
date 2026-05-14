@@ -1,0 +1,4 @@
+SUCCESS password_reset_id=password_reset_01KRJZB5W73ZW3S4ZYSA7NF0QK email=REDACTED
+OBJECT {"object":"password_reset","id":"password_reset_01KRJZB5W73ZW3S4ZYSA7NF0QK","userId":"user_01KPZREB8VAGNQHZ23M1XKSJVA","email":"REDACTED","passwordResetToken":"YWR1exEYyqWH6IqfxJB2J85un","passwordResetUrl":"https://original-register-63-staging.authkit.app/reset-password?token=YWR1exEYyqWH6IqfxJB2J85un","expiresAt":"2026-05-14T10:23:32.649Z","createdAt":"2026-05-14T10:08:32.649Z"}
+SUCCESS password_reset_id=password_reset_01KRJZC0SQGSTTV9Z4536J2Y3P email=REDACTED
+OBJECT {"object":"password_reset","id":"password_reset_01KRJZC0SQGSTTV9Z4536J2Y3P","userId":"user_01KPZREB8VAGNQHZ23M1XKSJVA","email":"REDACTED","passwordResetToken":"dm7w9T0QWfE11DyE16FeH6aZR","passwordResetUrl":"https://original-register-63-staging.authkit.app/reset-password?token=dm7w9T0QWfE11DyE16FeH6aZR","expiresAt":"2026-05-14T10:24:00.219Z","createdAt":"2026-05-14T10:09:00.219Z"}

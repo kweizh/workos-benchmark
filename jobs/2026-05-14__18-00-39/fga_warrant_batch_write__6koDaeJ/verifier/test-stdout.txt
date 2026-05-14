@@ -1,0 +1,80 @@
+downloading uv 0.9.7 x86_64-unknown-linux-gnu
+no checksums to verify
+installing to /root/.local/bin
+  uv
+  uvx
+everything's installed!
+
+To add $HOME/.local/bin to your PATH, either restart your shell or run:
+
+    source $HOME/.local/bin/env (sh, bash, zsh)
+    source $HOME/.local/bin/env.fish (fish)
+Downloading pygments (1.2MiB)
+ Downloading pygments
+Installed 7 packages in 15ms
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 4 items
+
+tests/test_final_state.py ..FF                                           [100%]
+
+=================================== FAILURES ===================================
+___________________ test_warrants_json_exists_and_has_token ____________________
+
+    def test_warrants_json_exists_and_has_token():
+>       assert os.path.isfile(WARRANTS_JSON), f"{WARRANTS_JSON} was not created by the agent."
+E       AssertionError: /home/user/myproject/warrants.json was not created by the agent.
+E       assert False
+E        +  where False = <function isfile at 0x7bc84fa5c220>('/home/user/myproject/warrants.json')
+E        +    where <function isfile at 0x7bc84fa5c220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:37: AssertionError
+______________ test_workos_check_returns_authorized_for_each_user ______________
+
+write_verify_script = '/home/user/myproject/verify.js'
+
+    def test_workos_check_returns_authorized_for_each_user(write_verify_script):
+        trial_id = _read_trial_id()
+        expected_doc = f"doc-batch-{trial_id}"
+        expected_users = [
+            f"user-batch-1-{trial_id}",
+            f"user-batch-2-{trial_id}",
+            f"user-batch-3-{trial_id}",
+        ]
+    
+        api_key = os.environ.get("WORKOS_API_KEY")
+        assert api_key, "WORKOS_API_KEY env var must be set in the verifier environment."
+    
+        env = os.environ.copy()
+        env["WORKOS_API_KEY"] = api_key
+    
+        result = subprocess.run(
+            ["node", VERIFY_JS],
+            capture_output=True,
+            text=True,
+            cwd=PROJECT_DIR,
+            env=env,
+            timeout=120,
+        )
+>       assert result.returncode == 0, (
+            f"Verifier script `node verify.js` failed with exit code {result.returncode}.\n"
+            f"stdout: {result.stdout}\nstderr: {result.stderr}"
+        )
+E       AssertionError: Verifier script `node verify.js` failed with exit code 1.
+E         stdout: 
+E         stderr: {"error":"ENOENT: no such file or directory, open '/home/user/myproject/warrants.json'"}
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['node', '/home/user/myproject/verify.js'], returncode=1, stdout='', stderr='{"error":"ENOENT: no such file or directory, open \'/home/user/myproject/warrants.json\'"}\n').returncode
+
+tests/test_final_state.py:131: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_index_js_exists
+PASSED tests/test_final_state.py::test_index_js_uses_batch_write_warrants
+FAILED tests/test_final_state.py::test_warrants_json_exists_and_has_token - A...
+FAILED tests/test_final_state.py::test_workos_check_returns_authorized_for_each_user
+========================= 2 failed, 2 passed in 0.21s ==========================

@@ -1,0 +1,13 @@
+{
+  "name": "fga-schema-definition-upload",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Scaffold for the WorkOS FGA resource-type schema upload task.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@workos-inc/node": "^7.61.0"
+  }
+}

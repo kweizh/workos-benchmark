@@ -1,0 +1,13 @@
+{
+  "name": "workos-password-reset",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Trigger a WorkOS password reset for a test user via the @workos-inc/node SDK.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@workos-inc/node": "^9.3.0"
+  }
+}

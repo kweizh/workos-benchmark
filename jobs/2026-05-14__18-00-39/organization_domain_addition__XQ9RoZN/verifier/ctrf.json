@@ -1,0 +1,71 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 5,
+            "passed": 3,
+            "failed": 2,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1778753511.4865565,
+            "stop": 1778753512.1956162
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_required_env_vars_present",
+                "status": "passed",
+                "duration": 0.000531825702637434,
+                "start": 1778753511.511079,
+                "stop": 1778753511.511814,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_add_domain_script_exists",
+                "status": "passed",
+                "duration": 0.00043333182111382484,
+                "start": 1778753511.5120046,
+                "stop": 1778753511.512595,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_org_json_exists_and_is_valid_json",
+                "status": "passed",
+                "duration": 0.0005090227350592613,
+                "start": 1778753511.5127635,
+                "stop": 1778753511.513394,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_org_json_contains_new_domain",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0006675655022263527,
+                "start": 1778753511.51356,
+                "stop": 1778753511.529537,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_org_json_contains_new_domain():\n        with open(ORG_JSON) as f:\n            data = json.load(f)\n    \n        org_id = data.get(\"id\")\n>       assert org_id == WORKOS_ORGANIZATION_ID, (\n            f\"Expected org.json id == {WORKOS_ORGANIZATION_ID}, got: {org_id!r}\"\n        )\nE       AssertionError: Expected org.json id == REDACTED, got: 'org_01KRJZG8MZKGHBA6GEPNGTVG4Q'\nE       assert 'org_01KRJZG8...BA6GEPNGTVG4Q' == 'org_01KPZNPF...RW1VGS6E1S9EG'\nE         \nE         - REDACTED\nE         + org_01KRJZG8MZKGHBA6GEPNGTVG4Q\n\ntests/test_final_state.py:53: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_workos_api_reflects_new_domain",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.6589681338518858,
+                "start": 1778753511.5297282,
+                "stop": 1778753512.1954417,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_workos_api_reflects_new_domain():\n        \"\"\"Independently fetch the organization from WorkOS to confirm the side effect is real.\"\"\"\n        url = f\"https://api.workos.com/organizations/{WORKOS_ORGANIZATION_ID}\"\n        req = urllib.request.Request(\n            url,\n            headers={\n                \"Authorization\": f\"Bearer {WORKOS_API_KEY}\",\n                \"Accept\": \"application/json\",\n            },\n        )\n        try:\n            with urllib.request.urlopen(req, timeout=30) as resp:\n                status = resp.getcode()\n                body = resp.read().decode(\"utf-8\")\n        except urllib.error.HTTPError as e:\n            pytest.fail(\n                f\"WorkOS API request to {url} failed with HTTP {e.code}: {e.read().decode('utf-8', errors='replace')}\"\n            )\n        except urllib.error.URLError as e:\n            pytest.fail(f\"WorkOS API request to {url} failed: {e}\")\n    \n        assert status == 200, f\"Expected HTTP 200 from WorkOS API, got {status}: {body}\"\n    \n        payload = json.loads(body)\n        assert payload.get(\"id\") == WORKOS_ORGANIZATION_ID, (\n            f\"Expected API response id == {WORKOS_ORGANIZATION_ID}, got: {payload.get('id')!r}\"\n        )\n    \n        domains = payload.get(\"domains\")\n        assert isinstance(domains, list), (\n            f\"Expected 'domains' in WorkOS API response to be a list, got: {type(domains)}\"\n        )\n    \n        normalized = [d for d in (_extract_domain(entry) for entry in domains) if d]\n>       assert WORKOS_NEW_DOMAIN.lower() in normalized, (\n            f\"Expected new domain {WORKOS_NEW_DOMAIN!r} to be present on the WorkOS \"\n            f\"organization {WORKOS_ORGANIZATION_ID}, but got: {normalized}\"\n        )\nE       AssertionError: Expected new domain 'REDACTED' to be present on the WorkOS organization REDACTED, but got: ['example.com']\nE       assert 'REDACTED' in ['example.com']\nE        +  where 'REDACTED' = <built-in method lower of str object at 0x7ab6d7aac9f0>()\nE        +    where <built-in method lower of str object at 0x7ab6d7aac9f0> = 'REDACTED'.lower\n\ntests/test_final_state.py:103: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

@@ -1,0 +1,18 @@
+{
+  "object": "organization_membership",
+  "id": "REDACTED",
+  "userId": "user_01KPZREB8VAGNQHZ23M1XKSJVA",
+  "organizationId": "REDACTED",
+  "organizationName": "Test Organization",
+  "status": "active",
+  "createdAt": "2026-05-14T09:28:25.187Z",
+  "updatedAt": "2026-05-14T10:09:21.614Z",
+  "role": {
+    "slug": "admin"
+  },
+  "roles": [
+    {
+      "slug": "admin"
+    }
+  ]
+}

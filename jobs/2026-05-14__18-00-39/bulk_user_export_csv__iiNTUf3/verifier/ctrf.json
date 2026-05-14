@@ -1,0 +1,65 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 5,
+            "passed": 5,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1778752964.9684806,
+            "stop": 1778752965.9540563
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_index_js_exists_and_uses_workos_sdk",
+                "status": "passed",
+                "duration": 0.0006381268613040447,
+                "start": 1778752964.990744,
+                "stop": 1778752964.991676,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_users_csv_has_trailing_newline_and_utf8",
+                "status": "passed",
+                "duration": 0.0005179727450013161,
+                "start": 1778752964.9918895,
+                "stop": 1778752964.9925768,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_users_csv_header_is_exact",
+                "status": "passed",
+                "duration": 0.0004933974705636501,
+                "start": 1778752964.9928195,
+                "stop": 1778752964.9934466,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_users_csv_rows_have_five_columns",
+                "status": "passed",
+                "duration": 0.0004952498711645603,
+                "start": 1778752964.9936247,
+                "stop": 1778752964.994254,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_users_csv_matches_live_workos_api",
+                "status": "passed",
+                "duration": 0.95917640440166,
+                "start": 1778752964.9944396,
+                "stop": 1778752965.9538307,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

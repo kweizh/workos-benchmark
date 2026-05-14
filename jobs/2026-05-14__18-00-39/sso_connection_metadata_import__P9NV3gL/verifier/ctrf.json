@@ -1,0 +1,86 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 7,
+            "passed": 6,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1778753191.806937,
+            "stop": 1778753193.6189234
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_script_file_exists",
+                "status": "passed",
+                "duration": 0.0007215463556349277,
+                "start": 1778753191.8507273,
+                "stop": 1778753191.8517797,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_package_json_exists_with_workos_dependency",
+                "status": "passed",
+                "duration": 0.0006883125752210617,
+                "start": 1778753191.8520668,
+                "stop": 1778753191.8529482,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_node_modules_has_workos_sdk",
+                "status": "passed",
+                "duration": 0.0004958296194672585,
+                "start": 1778753191.8532152,
+                "stop": 1778753191.853876,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_script_uses_workos_sdk_and_sso_intent",
+                "status": "passed",
+                "duration": 0.0005622636526823044,
+                "start": 1778753191.8541088,
+                "stop": 1778753191.8548353,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_portal_link_file_exists_and_is_https_url",
+                "status": "passed",
+                "duration": 0.0006020879372954369,
+                "start": 1778753191.8550842,
+                "stop": 1778753191.8558674,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_portal_link_returns_http_200",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.5012470022775233,
+                "start": 1778753191.856113,
+                "stop": 1778753192.4999537,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_portal_link_returns_http_200():\n        \"\"\"Priority 1: hit the real Portal URL produced by the agent and require HTTP 200.\"\"\"\n        url = pathlib.Path(LINK_FILE).read_text().strip().splitlines()[0].strip()\n        try:\n>           with _http_get(url) as resp:\n                 ^^^^^^^^^^^^^^\n\ntests/test_final_state.py:82: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_final_state.py:18: in _http_get\n    return urllib.request.urlopen(req, timeout=timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nusr/lib/python3.12/urllib/request.py:215: in urlopen\n    return opener.open(url, data, timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nusr/lib/python3.12/urllib/request.py:521: in open\n    response = meth(req, response)\n               ^^^^^^^^^^^^^^^^^^^\nusr/lib/python3.12/urllib/request.py:630: in http_response\n    response = self.parent.error(\nusr/lib/python3.12/urllib/request.py:559: in error\n    return self._call_chain(*args)\n           ^^^^^^^^^^^^^^^^^^^^^^^\nusr/lib/python3.12/urllib/request.py:492: in _call_chain\n    result = func(*args)\n             ^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <urllib.request.HTTPDefaultErrorHandler object at 0x70a8c989a810>\nreq = <urllib.request.Request object at 0x70a8c989a630>\nfp = <http.client.HTTPResponse object at 0x70a8c989a9e0>, code = 403\nmsg = 'Forbidden', hdrs = <http.client.HTTPMessage object at 0x70a8c989bda0>\n\n    def http_error_default(self, req, fp, code, msg, hdrs):\n>       raise HTTPError(req.full_url, code, msg, hdrs, fp)\nE       urllib.error.HTTPError: HTTP Error 403: Forbidden\n\nusr/lib/python3.12/urllib/request.py:639: HTTPError\n\nDuring handling of the above exception, another exception occurred:\n\n    def test_portal_link_returns_http_200():\n        \"\"\"Priority 1: hit the real Portal URL produced by the agent and require HTTP 200.\"\"\"\n        url = pathlib.Path(LINK_FILE).read_text().strip().splitlines()[0].strip()\n        try:\n            with _http_get(url) as resp:\n                status = resp.status\n        except urllib.error.HTTPError as e:\n>           pytest.fail(\n                f\"GET {url} raised HTTPError with status {e.code}: {e.reason}\"\n            )\nE           Failed: GET https://setup.workos.com/init?apiToken=REDACTED raised HTTPError with status 403: Forbidden\n\ntests/test_final_state.py:85: Failed",
+                "message": "The test failed in the call phase"
+            },
+            {
+                "name": "test_final_state.py::test_workos_organization_exists_via_real_api",
+                "status": "passed",
+                "duration": 1.1183322574943304,
+                "start": 1778753192.5002053,
+                "stop": 1778753193.6187277,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

@@ -1,0 +1,7 @@
+{
+  "exportId": "audit_log_export_01KRJZ54BCQHDZY0PTJY19Z99N",
+  "state": "ready",
+  "url": "https://exports.audit-logs.com/audit-log-exports/audit_log_trail_01KPZNPF2GTRVAAJDWT52JPVRX/audit_log_export_01KRJZ54BCQHDZY0PTJY19Z99N/audit_log_export_chunk_01KRJZ54C9C1XSGNCBTCPZ38ZK.csv?Expires=1778753717&Key-Pair-Id=K3GZ2OM07A79CW&Signature=ov7ZvTvK3pXkBM~tGpMF3donos7nBy9YE8eyBDTf7hiF-4HENyAAFhHZeu0qTl1xBbnyhxgge-mBp7ObRifi9KG2ouw03gSM8C~qGdkD7iLsKK1dF1KPsM4Nl3truUw4ONHB10il0ML37EjQzbXsFQCcp~ACWZTqlRzjFztwr9kjw5wFg50NaxQ2aao9lUSmR3EAL9SzDIEti3wIGWKJlkz6iq8PD-3r4eVPTNTp-WdCcnCRO732nffbQV4XFPfk3cEvMdQgefvNWgeYMk5JvdIMGofucfTDb8pdYRegKjOqXB~~et~vjVQgxU1ARpS2e~XDJYvCIh9aF9ducd2nRw__",
+  "rangeStart": "2026-05-13T10:05:14.020Z",
+  "rangeEnd": "2026-05-14T10:05:14.020Z"
+}

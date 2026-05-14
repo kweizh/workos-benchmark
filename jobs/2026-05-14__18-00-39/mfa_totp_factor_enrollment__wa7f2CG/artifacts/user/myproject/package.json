@@ -1,0 +1,9 @@
+{
+  "name": "mfa-totp-factor-enrollment",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "@workos-inc/node": "^7.0.0"
+  }
+}

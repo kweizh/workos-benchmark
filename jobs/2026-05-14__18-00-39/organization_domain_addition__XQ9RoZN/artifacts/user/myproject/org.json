@@ -1,0 +1,21 @@
+{
+  "object": "organization",
+  "id": "org_01KRJZG8MZKGHBA6GEPNGTVG4Q",
+  "name": "Task Organization",
+  "allowProfilesOutsideOrganization": false,
+  "domains": [
+    {
+      "object": "organization_domain",
+      "id": "org_domain_01KRJZGABYD4XB4499RPZ4Q8ZV",
+      "domain": "REDACTED",
+      "organizationId": "org_01KRJZG8MZKGHBA6GEPNGTVG4Q",
+      "state": "pending",
+      "createdAt": "2026-05-14T10:11:21.052Z",
+      "updatedAt": "2026-05-14T10:11:21.052Z"
+    }
+  ],
+  "createdAt": "2026-05-14T10:11:19.321Z",
+  "updatedAt": "2026-05-14T10:11:21.052Z",
+  "externalId": null,
+  "metadata": {}
+}

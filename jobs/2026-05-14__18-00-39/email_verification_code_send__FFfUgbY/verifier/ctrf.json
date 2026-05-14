@@ -1,0 +1,101 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 9,
+            "passed": 9,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1778753270.6375556,
+            "stop": 1778753271.4340277
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_package_json_lists_workos_sdk",
+                "status": "passed",
+                "duration": 0.0006247777491807938,
+                "start": 1778753270.6544492,
+                "stop": 1778753270.6552963,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workos_sdk_installed_in_node_modules",
+                "status": "passed",
+                "duration": 0.0005009216256439686,
+                "start": 1778753270.6554892,
+                "stop": 1778753270.6561236,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_index_js_exists",
+                "status": "passed",
+                "duration": 0.00036712735891342163,
+                "start": 1778753270.6563594,
+                "stop": 1778753270.6568482,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_index_js_uses_real_workos_sdk",
+                "status": "passed",
+                "duration": 0.00048536062240600586,
+                "start": 1778753270.6570427,
+                "stop": 1778753270.657649,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_index_js_reads_env_vars",
+                "status": "passed",
+                "duration": 0.00041110534220933914,
+                "start": 1778753270.657815,
+                "stop": 1778753270.6583736,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_index_js_calls_send_verification_email",
+                "status": "passed",
+                "duration": 0.000386727973818779,
+                "start": 1778753270.6585364,
+                "stop": 1778753270.6590443,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_index_js_does_not_mock_workos_api",
+                "status": "passed",
+                "duration": 0.00044433074072003365,
+                "start": 1778753270.6592603,
+                "stop": 1778753270.6598427,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_output_log_contains_success_entry",
+                "status": "passed",
+                "duration": 0.0004324312321841717,
+                "start": 1778753270.6600096,
+                "stop": 1778753270.66062,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workos_user_resolvable_via_live_get_user",
+                "status": "passed",
+                "duration": 0.7728839600458741,
+                "start": 1778753270.6607869,
+                "stop": 1778753271.4338498,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

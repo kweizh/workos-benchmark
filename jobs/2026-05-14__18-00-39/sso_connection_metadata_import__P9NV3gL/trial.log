@@ -1,0 +1,110 @@
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash  && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo sso_connection_metadata_import__P9NV3gL > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: mkdir -p /logs/artifacts
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# WorkOS Admin Portal SSO Connection Setup Link
+
+## Background
+When onboarding a new enterprise customer, your SaaS application needs to hand off SSO configuration to the customer's IT contact. WorkOS exposes an Admin Portal that provides a hosted, guided UI for IT contacts to verify domains and configure their SSO connection. Your application generates a short-lived secure URL via `workos.portal.generateLink({ organization, intent: 'sso' })` and redirects the IT contact to it.
+
+You are building a Node.js bootstrap script that programmatically generates such a Portal link for an existing organization and persists the URL to disk so that the IT contact can be redirected to it.
+
+## Requirements
+- Create a Node.js project at `/home/user/myproject`.
+- Initialize a `package.json` with `"type": "module"` (or use CommonJS, your choice) and install the `@workos-inc/node` SDK.
+- Create an executable script `/home/user/myproject/generate_link.js` that:
+  1. Reads `WORKOS_API_KEY` from the environment.
+  2. Reads `WORKOS_ORGANIZATION_ID` from the environment (this is the WorkOS Organization ID to scope the Admin Portal session to).
+  3. Instantiates the WorkOS SDK with the API key.
+  4. Calls `workos.portal.generateLink({ organization: <orgId>, intent: 'sso' })`.
+  5. Writes the returned `link` URL (and ONLY the URL, no extra whitespace or quotes — a single trailing newline is fine) to `/home/user/myproject/portal_link.txt`.
+  6. Also prints the URL to stdout.
+- Run the script once (e.g. `node generate_link.js`) so that `/home/user/myproject/portal_link.txt` exists with a real WorkOS Portal link.
+
+## Implementation Guide
+1. `cd /home/user/myproject`
+2. `npm init -y`
+3. `npm install @workos-inc/node`
+4. Write `generate_link.js` using the WorkOS Node SDK:
+   ```js
+   import { WorkOS } from '@workos-inc/node';
+   import { writeFileSync } from 'node:fs';
+
+   const workos = new WorkOS(process.env.WORKOS_API_KEY);
+   const organizationId = process.env.WORKOS_ORGANIZATION_ID;
+
+   const { link } = await workos.portal.generateLink({
+     organization: organizationId,
+     intent: 'sso',
+   });
+
+   writeFileSync('/home/user/myproject/portal_link.txt', link + '\n');
+   console.log(link);
+   ```
+5. Run the script: `node generate_link.js`.
+6. Confirm `/home/user/myproject/portal_link.txt` exists and contains a URL beginning with `https://`.
+
+## Constraints
+- Project path: `/home/user/myproject`
+- Script path: `/home/user/myproject/generate_link.js`
+- Output file: `/home/user/myproject/portal_link.txt`
+- The script MUST use the real WorkOS API via the `@workos-inc/node` SDK. Do NOT mock the WorkOS client or stub the network call.
+- Use the `WORKOS_API_KEY` and `WORKOS_ORGANIZATION_ID` environment variables; do not hardcode them in the script.
+- The intent passed to `generateLink` must be exactly the string `sso`.
+
+## Integrations
+- WorkOS (real API; `WORKOS_API_KEY` and `WORKOS_ORGANIZATION_ID` are provided)
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured

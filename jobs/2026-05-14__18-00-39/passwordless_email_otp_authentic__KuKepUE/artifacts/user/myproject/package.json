@@ -1,0 +1,13 @@
+{
+  "name": "workos-passwordless-otp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Passwordless email OTP (Magic Auth) demo using the WorkOS Node SDK.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@workos-inc/node": "^9.3.0"
+  }
+}

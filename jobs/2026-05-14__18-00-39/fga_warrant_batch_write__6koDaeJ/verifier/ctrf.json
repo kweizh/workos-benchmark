@@ -1,0 +1,62 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 2,
+            "failed": 2,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1778753496.382754,
+            "stop": 1778753496.5948966
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_index_js_exists",
+                "status": "passed",
+                "duration": 0.0004705139435827732,
+                "start": 1778753496.395914,
+                "stop": 1778753496.396591,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_index_js_uses_batch_write_warrants",
+                "status": "passed",
+                "duration": 0.0004296721890568733,
+                "start": 1778753496.3968053,
+                "stop": 1778753496.397366,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_warrants_json_exists_and_has_token",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0005187192000448704,
+                "start": 1778753496.397533,
+                "stop": 1778753496.4123788,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_warrants_json_exists_and_has_token():\n>       assert os.path.isfile(WARRANTS_JSON), f\"{WARRANTS_JSON} was not created by the agent.\"\nE       AssertionError: /home/user/myproject/warrants.json was not created by the agent.\nE       assert False\nE        +  where False = <function isfile at 0x7bc84fa5c220>('/home/user/myproject/warrants.json')\nE        +    where <function isfile at 0x7bc84fa5c220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:37: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_workos_check_returns_authorized_for_each_user",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.1786789670586586,
+                "start": 1778753496.4125652,
+                "stop": 1778753496.5947008,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "write_verify_script = '/home/user/myproject/verify.js'\n\n    def test_workos_check_returns_authorized_for_each_user(write_verify_script):\n        trial_id = _read_trial_id()\n        expected_doc = f\"doc-batch-{trial_id}\"\n        expected_users = [\n            f\"user-batch-1-{trial_id}\",\n            f\"user-batch-2-{trial_id}\",\n            f\"user-batch-3-{trial_id}\",\n        ]\n    \n        api_key = os.environ.get(\"WORKOS_API_KEY\")\n        assert api_key, \"WORKOS_API_KEY env var must be set in the verifier environment.\"\n    \n        env = os.environ.copy()\n        env[\"WORKOS_API_KEY\"] = api_key\n    \n        result = subprocess.run(\n            [\"node\", VERIFY_JS],\n            capture_output=True,\n            text=True,\n            cwd=PROJECT_DIR,\n            env=env,\n            timeout=120,\n        )\n>       assert result.returncode == 0, (\n            f\"Verifier script `node verify.js` failed with exit code {result.returncode}.\\n\"\n            f\"stdout: {result.stdout}\\nstderr: {result.stderr}\"\n        )\nE       AssertionError: Verifier script `node verify.js` failed with exit code 1.\nE         stdout: \nE         stderr: {\"error\":\"ENOENT: no such file or directory, open '/home/user/myproject/warrants.json'\"}\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['node', '/home/user/myproject/verify.js'], returncode=1, stdout='', stderr='{\"error\":\"ENOENT: no such file or directory, open \\'/home/user/myproject/warrants.json\\'\"}\\n').returncode\n\ntests/test_final_state.py:131: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

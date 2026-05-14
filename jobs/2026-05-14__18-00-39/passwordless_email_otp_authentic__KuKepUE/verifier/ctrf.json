@@ -1,0 +1,107 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 9,
+            "passed": 7,
+            "failed": 2,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1778753150.589277,
+            "stop": 1778753151.4621003
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_package_json_lists_workos_sdk",
+                "status": "passed",
+                "duration": 0.0005829525180160999,
+                "start": 1778753150.6051297,
+                "stop": 1778753150.605922,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workos_sdk_installed_in_node_modules",
+                "status": "passed",
+                "duration": 0.0005205697380006313,
+                "start": 1778753150.6061146,
+                "stop": 1778753150.606772,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_index_js_exists",
+                "status": "passed",
+                "duration": 0.0004058489575982094,
+                "start": 1778753150.6069424,
+                "stop": 1778753150.607471,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_index_js_uses_real_workos_sdk",
+                "status": "passed",
+                "duration": 0.00047105783596634865,
+                "start": 1778753150.607637,
+                "stop": 1778753150.6082623,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_index_js_reads_env_vars",
+                "status": "passed",
+                "duration": 0.0003894912078976631,
+                "start": 1778753150.6084893,
+                "stop": 1778753150.6090026,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_index_js_calls_create_magic_auth",
+                "status": "passed",
+                "duration": 0.0006660176441073418,
+                "start": 1778753150.6092696,
+                "stop": 1778753150.6101642,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_index_js_does_not_mock_workos_api",
+                "status": "passed",
+                "duration": 0.0005896100774407387,
+                "start": 1778753150.6104167,
+                "stop": 1778753150.6111584,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_output_log_contains_success_entry",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0006381007842719555,
+                "start": 1778753150.6113858,
+                "stop": 1778753150.6273448,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_output_log_contains_success_entry():\n        assert os.path.isfile(LOG_FILE), f\"{LOG_FILE} must exist after the task is performed.\"\n        content = _read(LOG_FILE).strip()\n        assert content, f\"{LOG_FILE} must not be empty.\"\n        matched = any(SUCCESS_LINE_RE.match(line) for line in content.splitlines())\n>       assert matched, (\n            \"output.log must contain a line like \"\n            \"'SUCCESS magic_auth_id=magic_auth_<id> email=passwordless-otp-test@example.com'. \"\n            f\"Got:\\n{content}\"\n        )\nE       AssertionError: output.log must contain a line like 'SUCCESS magic_auth_id=magic_auth_<id> email=passwordless-otp-test@example.com'. Got:\nE         FAILURE Error: authentication_method_not_allowed\nE         Error Description: Magic Auth is disabled.\nE       assert False\n\ntests/test_final_state.py:106: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_script_can_call_live_workos_api",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.830267567653209,
+                "start": 1778753150.627544,
+                "stop": 1778753151.461925,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_script_can_call_live_workos_api():\n        \"\"\"Run the script again against the live WorkOS API and confirm a new SUCCESS line.\"\"\"\n        api_key = os.environ.get(\"WORKOS_API_KEY\")\n        client_id = os.environ.get(\"WORKOS_CLIENT_ID\")\n        if not api_key or not client_id:\n            pytest.skip(\"Verifier missing WORKOS_API_KEY / WORKOS_CLIENT_ID; skipping live API check.\")\n    \n        before = \"\"\n        if os.path.isfile(LOG_FILE):\n            before = _read(LOG_FILE)\n    \n        env = os.environ.copy()\n        env[\"WORKOS_API_KEY\"] = api_key\n        env[\"WORKOS_CLIENT_ID\"] = client_id\n    \n        result = subprocess.run(\n            [\"node\", \"index.js\"],\n            cwd=PROJECT_DIR,\n            capture_output=True,\n            text=True,\n            env=env,\n            timeout=60,\n        )\n>       assert result.returncode == 0, (\n            f\"Re-running `node index.js` against the live WorkOS API failed.\\n\"\n            f\"stdout: {result.stdout}\\nstderr: {result.stderr}\"\n        )\nE       AssertionError: Re-running `node index.js` against the live WorkOS API failed.\nE         stdout: \nE         stderr: \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['node', 'index.js'], returncode=1, stdout='', stderr='').returncode\n\ntests/test_final_state.py:136: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

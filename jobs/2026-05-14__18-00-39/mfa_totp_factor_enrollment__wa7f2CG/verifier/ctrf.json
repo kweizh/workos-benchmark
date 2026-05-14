@@ -1,0 +1,38 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 2,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1778753153.0003958,
+            "stop": 1778753153.9396086
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_factor_json_exists_and_has_required_fields",
+                "status": "passed",
+                "duration": 0.0006212885491549969,
+                "start": 1778753153.0140772,
+                "stop": 1778753153.0149162,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_factor_retrievable_via_workos_api",
+                "status": "passed",
+                "duration": 0.9240375170484185,
+                "start": 1778753153.0151134,
+                "stop": 1778753153.939377,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}
