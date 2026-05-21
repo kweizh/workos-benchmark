@@ -1,0 +1,5 @@
+{
+  "task_name": "email_verification_send",
+  "task_description": "# Send a Verification Email to a WorkOS User\n\n## Background\nTrigger WorkOS to send an email verification message to a given user via `sendVerificationEmail`.\n\n## Requirements\n1. Project at `/home/user/myproject`.\n2. Implement `/home/user/myproject/send_verification.js` that:\n   - Reads `WORKOS_API_KEY` and `WORKOS_USER_ID`.\n   - Calls `workos.userManagement.sendVerificationEmail({ userId: process.env.WORKOS_USER_ID })`.\n   - Writes the returned object as JSON to `/home/user/myproject/verification.json`.\n3. Run `node send_verification.js`.\n\n## Constraints\n- Real WorkOS API; no mocks.\n- Should not throw; on success a JSON object must be persisted.\n\n## Integrations\n- WorkOS (User Management API).",
+  "truth": "# Verification Plan\n\n1. Script exists; verification.json exists and is valid JSON.\n2. The response must contain a `user` object whose `id == WORKOS_USER_ID`.\n3. Independently `GET /user_management/users/{WORKOS_USER_ID}` to confirm the user exists.\n"
+}

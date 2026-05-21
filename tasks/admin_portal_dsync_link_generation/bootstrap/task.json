@@ -1,0 +1,5 @@
+{
+  "task_name": "admin_portal_dsync_link_generation",
+  "task_description": "# Generate an Admin Portal Directory Sync Setup Link\n\n## Background\nGenerate an Admin Portal link to let an organization administrator configure their own Directory Sync (intent: `dsync`).\n\n## Requirements\n1. Project lives at `/home/user/myproject`.\n2. Implement `/home/user/myproject/portal_dsync_link.js` that:\n   - Reads `WORKOS_API_KEY` and `WORKOS_ORGANIZATION_ID`.\n   - Calls `workos.portal.generateLink({ organization, intent: 'dsync' })`.\n   - Writes the response object as JSON to `/home/user/myproject/portal_link.json`.\n3. Run `node portal_dsync_link.js`.\n\n## Constraints\n- Real WorkOS API; no mocks.\n- The `link` must be an HTTPS URL on a WorkOS domain.\n\n## Integrations\n- WorkOS (Admin Portal API).",
+  "truth": "# Verification Plan\n\n1. Script and portal_link.json exist.\n2. JSON contains a `link` (string) starting with `https://`.\n3. Independently POST `/portal/generate_link` with `intent: 'dsync'` and confirm a valid response.\n"
+}

@@ -1,0 +1,5 @@
+{
+  "task_name": "invitation_listing",
+  "task_description": "# List WorkOS Invitations for an Organization\n\n## Background\nEnumerate every invitation associated with a WorkOS organization, paginating with `limit: 2` to exercise the cursor.\n\n## Requirements\n1. Project at `/home/user/myproject`.\n2. Implement `/home/user/myproject/list_invitations.js` that:\n   - Reads `WORKOS_API_KEY` and `WORKOS_ORGANIZATION_ID`.\n   - Pages through `workos.userManagement.listInvitations({ organizationId: process.env.WORKOS_ORGANIZATION_ID, limit: 2, after })`.\n   - Writes an array of `{ id, email, state, organization_id }` (strings) to `/home/user/myproject/invitations.json`.\n3. Run `node list_invitations.js`.\n\n## Constraints\n- Real WorkOS API; no mocks. Page size MUST be 2.\n\n## Integrations\n- WorkOS (User Management Invitations API).",
+  "truth": "# Verification Plan\n\n1. Script and invitations.json exist; JSON is an array of `{id, email, state, organization_id}` strings; `organization_id == WORKOS_ORGANIZATION_ID` for every entry.\n2. Independently page `GET /user_management/invitations?organization_id=...&limit=100` and confirm the set of `id`s matches.\n"
+}

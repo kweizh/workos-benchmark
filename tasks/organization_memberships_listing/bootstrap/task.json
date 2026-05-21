@@ -1,0 +1,5 @@
+{
+  "task_name": "organization_memberships_listing",
+  "task_description": "# Paginate Organization Memberships\n\n## Background\nList every organization membership (user-to-org relationship) attached to a given WorkOS organization.\n\n## Requirements\n1. Project at `/home/user/myproject`.\n2. Implement `/home/user/myproject/list_memberships.js` that:\n   - Reads `WORKOS_API_KEY` and `WORKOS_ORGANIZATION_ID`.\n   - Pages through `workos.userManagement.listOrganizationMemberships({ organizationId, limit: 2, after })`.\n   - Writes a JSON array of `{ id, user_id, organization_id, status }` (strings) to `/home/user/myproject/memberships.json`.\n3. Run `node list_memberships.js`.\n\n## Constraints\n- Real WorkOS API; no mocks. Page size 2.\n\n## Integrations\n- WorkOS (User Management API).",
+  "truth": "# Verification Plan\n\n1. Script and memberships.json exist; JSON is an array of `{id, user_id, organization_id, status}`.\n2. Each `organization_id == WORKOS_ORGANIZATION_ID`.\n3. Independently page `GET /user_management/organization_memberships?organization_id=...&limit=100` and confirm the set of `id`s matches.\n"
+}

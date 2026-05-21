@@ -1,0 +1,10 @@
+{
+  "task": [
+    "WORKOS_API_KEY",
+    "WORKOS_USER_ID"
+  ],
+  "verifier": [
+    "WORKOS_API_KEY",
+    "WORKOS_USER_ID"
+  ]
+}
