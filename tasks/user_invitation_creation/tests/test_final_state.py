@@ -83,8 +83,8 @@ def test_script_uses_real_workos_sdk():
     assert "WORKOS_ORGANIZATION_ID" in source, (
         "send_invitation.js must read WORKOS_ORGANIZATION_ID from environment variables."
     )
-    assert "WORKOS_INVITE_EMAIL" in source, (
-        "send_invitation.js must read WORKOS_INVITE_EMAIL from environment variables."
+    assert "ZEALT_RUN_ID" in source, (
+        "send_invitation.js must read ZEALT_RUN_ID from environment variables."
     )
 
 
@@ -108,10 +108,11 @@ def test_invitation_json_shape():
 def test_invitation_matches_workos_api():
     """Priority 1: independently call the WorkOS API and confirm the invitation is pending
     and addressed to the expected email / organization."""
-    expected_email = os.environ.get("WORKOS_INVITE_EMAIL")
+    run_id = os.environ.get("ZEALT_RUN_ID")
+    expected_email = f"test-{run_id}@example.com" if run_id else os.environ.get("WORKOS_INVITE_EMAIL")
     expected_org = os.environ.get("WORKOS_ORGANIZATION_ID")
     assert expected_email, (
-        "WORKOS_INVITE_EMAIL must be set in the verifier environment."
+        "ZEALT_RUN_ID or WORKOS_INVITE_EMAIL must be set in the verifier environment."
     )
     assert expected_org, (
         "WORKOS_ORGANIZATION_ID must be set in the verifier environment."
@@ -127,7 +128,7 @@ def test_invitation_matches_workos_api():
     assert (
         (api_invitation.get("email") or "").lower() == expected_email.lower()
     ), (
-        "Invitation email returned by WorkOS does not match WORKOS_INVITE_EMAIL.\n"
+        "Invitation email returned by WorkOS does not match expected email.\n"
         f"  WorkOS: {api_invitation.get('email')!r}\n"
         f"  expected: {expected_email!r}"
     )

@@ -1,7 +1,0 @@
-{
-  "library_name": "WorkOS",
-  "complexity_level": "simple set of 2-5 commands",
-  "deep_research_path": "/Users/kw/code/zealt/workos-benchmark/plan.md",
-  "task_name": "directory_sync_user_listing",
-  "output_dir": "scratchpad/pending-tasks/"
-}

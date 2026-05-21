@@ -49,7 +49,13 @@ def test_workos_api_key_env():
     )
 
 
-def test_workos_directory_id_env():
-    assert os.environ.get("WORKOS_DIRECTORY_ID"), (
-        "WORKOS_DIRECTORY_ID environment variable must be set in the task environment."
+def test_workos_organization_id_env():
+    assert os.environ.get("WORKOS_ORGANIZATION_ID"), (
+        "WORKOS_ORGANIZATION_ID environment variable must be set in the task environment."
+    )
+
+
+def test_zealt_run_id_env():
+    assert os.environ.get("ZEALT_RUN_ID"), (
+        "ZEALT_RUN_ID environment variable must be set in the task environment."
     )

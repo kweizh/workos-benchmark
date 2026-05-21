@@ -8,8 +8,8 @@ Your job is to write a small Node.js script that uses the official `@workos-inc/
 ## Requirements
 - Create a Node.js script at `/home/user/myproject/send_invitation.js`.
 - Initialize the WorkOS client using the `WORKOS_API_KEY` environment variable. Do NOT hardcode the API key.
-- Read the target organization id from the `WORKOS_ORGANIZATION_ID` environment variable and the recipient email from the `WORKOS_INVITE_EMAIL` environment variable. Do NOT hardcode either value.
-- Call `await workos.userManagement.sendInvitation({ email: process.env.WORKOS_INVITE_EMAIL, organizationId: process.env.WORKOS_ORGANIZATION_ID })` from the official `@workos-inc/node` SDK.
+- Read the target organization id from the `WORKOS_ORGANIZATION_ID` environment variable and construct the recipient email using the `ZEALT_RUN_ID` environment variable (e.g. `test-${process.env.ZEALT_RUN_ID}@example.com`). Do NOT hardcode the organization ID.
+- Call `await workos.userManagement.sendInvitation({ email: \`test-${process.env.ZEALT_RUN_ID}@example.com\`, organizationId: process.env.WORKOS_ORGANIZATION_ID })` from the official `@workos-inc/node` SDK.
 - Write the resulting invitation `id` and `token` to `/home/user/myproject/invitation.json` as a JSON object with exactly the keys `id` and `token` (string values). For example: `{"id": "invitation_01...", "token": "..."}`.
 - Run the script once so that `invitation.json` is written before the task completes.
 
@@ -18,7 +18,7 @@ Your job is to write a small Node.js script that uses the official `@workos-inc/
 2. Inside that directory, create `send_invitation.js` that:
    - Imports `WorkOS` from `@workos-inc/node`.
    - Constructs the client as `new WorkOS(process.env.WORKOS_API_KEY)`.
-   - Calls `await workos.userManagement.sendInvitation({ email: process.env.WORKOS_INVITE_EMAIL, organizationId: process.env.WORKOS_ORGANIZATION_ID })`.
+   - Calls `await workos.userManagement.sendInvitation({ email: \`test-${process.env.ZEALT_RUN_ID}@example.com\`, organizationId: process.env.WORKOS_ORGANIZATION_ID })`.
    - Writes `{ id: invitation.id, token: invitation.token }` to `invitation.json` using `JSON.stringify`.
 3. Execute the script with `node send_invitation.js` from `/home/user/myproject` so the output file is produced.
 
@@ -31,4 +31,4 @@ Your job is to write a small Node.js script that uses the official `@workos-inc/
 - Read credentials and inputs from environment variables only.
 
 ## Integrations
-- WorkOS (User Management / Invitations). Requires `WORKOS_API_KEY`, `WORKOS_ORGANIZATION_ID`, and `WORKOS_INVITE_EMAIL`.
+- WorkOS (User Management / Invitations). Requires `WORKOS_API_KEY`, `WORKOS_ORGANIZATION_ID`, and `ZEALT_RUN_ID`.

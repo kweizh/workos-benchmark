@@ -1,7 +1,0 @@
-{
-  "library_name": "WorkOS",
-  "complexity_level": "multi-step sequential commands sets",
-  "deep_research_path": "plan.md",
-  "task_name": "sso_connection_metadata_import",
-  "output_dir": "scratchpad/pending-tasks/"
-}

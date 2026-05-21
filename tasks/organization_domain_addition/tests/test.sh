@@ -5,6 +5,10 @@
 
 curl -LsSf https://astral.sh/uv/0.9.7/install.sh | sh
 
+if [ -f /logs/artifacts/run-id ]; then
+  export ZEALT_RUN_ID=$(cat /logs/artifacts/run-id)
+fi
+
 source $HOME/.local/bin/env
 # CTRF produces a standard test report in JSON format which is useful for logging.
 uvx \

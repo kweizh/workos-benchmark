@@ -12,6 +12,10 @@ ORG_JSON = os.path.join(PROJECT_DIR, "org.json")
 WORKOS_API_KEY = os.environ.get("WORKOS_API_KEY")
 WORKOS_ORGANIZATION_ID = os.environ.get("WORKOS_ORGANIZATION_ID")
 WORKOS_NEW_DOMAIN = os.environ.get("WORKOS_NEW_DOMAIN")
+ZEALT_RUN_ID = os.environ.get("ZEALT_RUN_ID")
+
+if ZEALT_RUN_ID:
+    WORKOS_NEW_DOMAIN = f"{ZEALT_RUN_ID}.{WORKOS_NEW_DOMAIN}"
 
 
 def _extract_domain(entry):
