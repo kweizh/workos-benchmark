@@ -1,0 +1,10 @@
+{
+  "name": "admin_portal_dsync_link_generation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Generate a WorkOS Admin Portal DSync setup link.",
+  "type": "commonjs",
+  "dependencies": {
+    "@workos-inc/node": "^7.0.0"
+  }
+}

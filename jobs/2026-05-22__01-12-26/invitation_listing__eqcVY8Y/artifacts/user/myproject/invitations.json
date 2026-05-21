@@ -1,0 +1,14 @@
+[
+  {
+    "id": "invitation_01KS5RPPJD6W2P4AHH79YSCTA6",
+    "email": "test-zr-user-invitation-creation--xicycax@example.com",
+    "state": "pending",
+    "organization_id": "REDACTED"
+  },
+  {
+    "id": "invitation_01KS5R6F2XCW0M8AK473PVKWCQ",
+    "email": "pochi-invite-zr-invitation-revocation--sayn6bh@pochi-benchmark.example",
+    "state": "revoked",
+    "organization_id": "REDACTED"
+  }
+]

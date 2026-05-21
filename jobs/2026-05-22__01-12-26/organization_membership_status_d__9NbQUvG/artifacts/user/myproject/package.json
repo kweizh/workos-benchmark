@@ -1,0 +1,10 @@
+{
+  "name": "workos-membership-deactivate",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Deactivate a WorkOS organization membership.",
+  "type": "commonjs",
+  "dependencies": {
+    "@workos-inc/node": "^7.0.0"
+  }
+}

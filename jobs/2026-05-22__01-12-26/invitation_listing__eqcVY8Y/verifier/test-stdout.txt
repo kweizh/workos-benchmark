@@ -1,0 +1,30 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0
+collected 4 items
+
+tests/test_final_state.py ...F                                           [100%]
+
+=================================== FAILURES ===================================
+_____________________________ test_ids_match_live ______________________________
+
+    def test_ids_match_live():
+        with open(OUT_PATH) as f:
+            data = json.load(f)
+        local_ids = sorted(e["id"] for e in data)
+        live_ids = sorted(_fetch_all_ids())
+>       assert local_ids == live_ids
+E       AssertionError: assert ['invitation_...4AHH79YSCTA6'] == ['invitation_...5H8CQPN', ...]
+E         At index 0 diff: 'invitation_01KS5R6F2XCW0M8AK473PVKWCQ' != 'invitation_01KRJZH5NBGW7M578MHJNVVDGV'
+E         Right contains 9 more items, first extra item: 'invitation_01KS4YN0RYZ7XGWKZVB50CK6JF'
+E         Use -v to get more diff
+
+tests/test_final_state.py:66: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_env
+PASSED tests/test_final_state.py::test_script_exists
+PASSED tests/test_final_state.py::test_local_shape
+FAILED tests/test_final_state.py::test_ids_match_live - AssertionError: asser...
+========================= 1 failed, 3 passed in 0.76s ==========================

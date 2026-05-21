@@ -1,0 +1,34 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0
+collected 4 items
+
+tests/test_final_state.py ..FF                                           [100%]
+
+=================================== FAILURES ===================================
+________________________ test_org_json_exists_and_valid ________________________
+
+    def test_org_json_exists_and_valid():
+>       assert os.path.isfile(ORG_JSON), f"Expected {ORG_JSON} to exist."
+E       AssertionError: Expected /home/user/myproject/org.json to exist.
+E       assert False
+E        +  where False = <function isfile at 0x7030332d8220>('/home/user/myproject/org.json')
+E        +    where <function isfile at 0x7030332d8220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:28: AssertionError
+_____________________ test_workos_api_reflects_created_org _____________________
+
+    def test_workos_api_reflects_created_org():
+>       with open(ORG_JSON) as f:
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/user/myproject/org.json'
+
+tests/test_final_state.py:41: FileNotFoundError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_required_env_vars_present
+PASSED tests/test_final_state.py::test_create_org_script_exists
+FAILED tests/test_final_state.py::test_org_json_exists_and_valid - AssertionE...
+FAILED tests/test_final_state.py::test_workos_api_reflects_created_org - File...
+========================= 2 failed, 2 passed in 0.04s ==========================

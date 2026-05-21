@@ -1,0 +1,96 @@
+downloading uv 0.9.7 x86_64-unknown-linux-gnu
+no checksums to verify
+installing to /root/.local/bin
+  uv
+  uvx
+everything's installed!
+
+To add $HOME/.local/bin to your PATH, either restart your shell or run:
+
+    source $HOME/.local/bin/env (sh, bash, zsh)
+    source $HOME/.local/bin/env.fish (fish)
+Downloading pygments (1.2MiB)
+ Downloading pygments
+Installed 7 packages in 39ms
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 5 items
+
+tests/test_final_state.py ..FFF                                          [100%]
+
+=================================== FAILURES ===================================
+____________________ test_org_json_exists_and_is_valid_json ____________________
+
+    def test_org_json_exists_and_is_valid_json():
+>       assert os.path.isfile(ORG_JSON), f"Expected {ORG_JSON} to exist after running add_domain.js."
+E       AssertionError: Expected /home/user/myproject/org.json to exist after running add_domain.js.
+E       assert False
+E        +  where False = <function isfile at 0x79e202e34220>('/home/user/myproject/org.json')
+E        +    where <function isfile at 0x79e202e34220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:46: AssertionError
+______________________ test_org_json_contains_new_domain _______________________
+
+    def test_org_json_contains_new_domain():
+>       with open(ORG_JSON) as f:
+             ^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/user/myproject/org.json'
+
+tests/test_final_state.py:53: FileNotFoundError
+_____________________ test_workos_api_reflects_new_domain ______________________
+
+    def test_workos_api_reflects_new_domain():
+        """Independently fetch the organization from WorkOS to confirm the side effect is real."""
+        url = f"https://api.workos.com/organizations/{WORKOS_ORGANIZATION_ID}"
+        req = urllib.request.Request(
+            url,
+            headers={
+                "Authorization": f"Bearer {WORKOS_API_KEY}",
+                "Accept": "application/json",
+            },
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                status = resp.getcode()
+                body = resp.read().decode("utf-8")
+        except urllib.error.HTTPError as e:
+            pytest.fail(
+                f"WorkOS API request to {url} failed with HTTP {e.code}: {e.read().decode('utf-8', errors='replace')}"
+            )
+        except urllib.error.URLError as e:
+            pytest.fail(f"WorkOS API request to {url} failed: {e}")
+    
+        assert status == 200, f"Expected HTTP 200 from WorkOS API, got {status}: {body}"
+    
+        payload = json.loads(body)
+        assert payload.get("id") == WORKOS_ORGANIZATION_ID, (
+            f"Expected API response id == {WORKOS_ORGANIZATION_ID}, got: {payload.get('id')!r}"
+        )
+    
+        domains = payload.get("domains")
+        assert isinstance(domains, list), (
+            f"Expected 'domains' in WorkOS API response to be a list, got: {type(domains)}"
+        )
+    
+        normalized = [d for d in (_extract_domain(entry) for entry in domains) if d]
+>       assert WORKOS_NEW_DOMAIN.lower() in normalized, (
+            f"Expected new domain {WORKOS_NEW_DOMAIN!r} to be present on the WorkOS "
+            f"organization {WORKOS_ORGANIZATION_ID}, but got: {normalized}"
+        )
+E       AssertionError: Expected new domain 'zr-organization-domain-addition--4u9obaq.REDACTED' to be present on the WorkOS organization REDACTED, but got: ['example.com']
+E       assert 'zr-organization-domain-addition--4u9obaq.REDACTED' in ['example.com']
+E        +  where 'zr-organization-domain-addition--4u9obaq.REDACTED' = <built-in method lower of str object at 0x79e20221fc90>()
+E        +    where <built-in method lower of str object at 0x79e20221fc90> = 'zr-organization-domain-addition--4u9obaq.REDACTED'.lower
+
+tests/test_final_state.py:107: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_required_env_vars_present
+PASSED tests/test_final_state.py::test_add_domain_script_exists
+FAILED tests/test_final_state.py::test_org_json_exists_and_is_valid_json - As...
+FAILED tests/test_final_state.py::test_org_json_contains_new_domain - FileNot...
+FAILED tests/test_final_state.py::test_workos_api_reflects_new_domain - Asser...
+========================= 3 failed, 2 passed in 0.80s ==========================

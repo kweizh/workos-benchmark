@@ -1,0 +1,10 @@
+{
+  "name": "organization_listing_pagination",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Paginate WorkOS organizations and dump to JSON.",
+  "type": "commonjs",
+  "dependencies": {
+    "@workos-inc/node": "^7.0.0"
+  }
+}

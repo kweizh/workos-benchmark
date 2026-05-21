@@ -1,0 +1,10 @@
+{
+  "name": "workos-org-domain",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Add a new domain to an existing WorkOS organization.",
+  "type": "commonjs",
+  "dependencies": {
+    "@workos-inc/node": "^7.0.0"
+  }
+}

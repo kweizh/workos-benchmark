@@ -1,0 +1,10 @@
+{
+  "name": "events_listing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "List WorkOS Events via the Events API.",
+  "type": "commonjs",
+  "dependencies": {
+    "@workos-inc/node": "^7.0.0"
+  }
+}

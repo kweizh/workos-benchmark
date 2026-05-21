@@ -1,0 +1,56 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 4,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779384523.9157903,
+            "stop": 1779384523.9450638
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_widget_token_file_exists_and_non_empty",
+                "status": "passed",
+                "duration": 0.0006567351520061493,
+                "start": 1779384523.9408593,
+                "stop": 1779384523.9417796,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_widget_token_has_jwt_structure",
+                "status": "passed",
+                "duration": 0.000561700202524662,
+                "start": 1779384523.942026,
+                "stop": 1779384523.942757,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_widget_token_payload_iss_is_workos_api",
+                "status": "passed",
+                "duration": 0.0005659954622387886,
+                "start": 1779384523.9430377,
+                "stop": 1779384523.943767,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_widget_token_payload_contains_organization_and_user",
+                "status": "passed",
+                "duration": 0.0006913864053785801,
+                "start": 1779384523.943983,
+                "stop": 1779384523.9448528,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

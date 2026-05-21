@@ -1,0 +1,64 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 3,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779384238407,
+            "stop": 1779384239166
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_env",
+                "status": "passed",
+                "duration": 0,
+                "start": 1779384238432,
+                "stop": 1779384238432,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_script_exists",
+                "status": "passed",
+                "duration": 0,
+                "start": 1779384238433,
+                "stop": 1779384238433,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_local_shape",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779384238433,
+                "stop": 1779384238434,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_ids_match_live",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 732,
+                "start": 1779384238434,
+                "stop": 1779384239166,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_ids_match_live():\n        with open(OUT_PATH) as f:\n            data = json.load(f)\n        local_ids = sorted(e[\"id\"] for e in data)\n        live_ids = sorted(_fetch_all_ids())\n>       assert local_ids == live_ids\nE       AssertionError: assert ['invitation_...4AHH79YSCTA6'] == ['invitation_...5H8CQPN', ...]\nE         At index 0 diff: 'invitation_01KS5R6F2XCW0M8AK473PVKWCQ' != 'invitation_01KRJZH5NBGW7M578MHJNVVDGV'\nE         Right contains 9 more items, first extra item: 'invitation_01KS4YN0RYZ7XGWKZVB50CK6JF'\nE         Use -v to get more diff\n\ntests/test_final_state.py:66: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

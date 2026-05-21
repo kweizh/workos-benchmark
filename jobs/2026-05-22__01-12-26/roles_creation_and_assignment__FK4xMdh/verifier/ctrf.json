@@ -1,0 +1,74 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 6,
+            "passed": 6,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779383933.5874398,
+            "stop": 1779383934.397898
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_index_js_created",
+                "status": "passed",
+                "duration": 0.0005090911872684956,
+                "start": 1779383933.6036017,
+                "stop": 1779383933.6043234,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_index_js_uses_update_with_admin_role",
+                "status": "passed",
+                "duration": 0.0004359455779194832,
+                "start": 1779383933.6045158,
+                "stop": 1779383933.6050856,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_result_json_exists_and_is_valid_json",
+                "status": "passed",
+                "duration": 0.0004198448732495308,
+                "start": 1779383933.605262,
+                "stop": 1779383933.6058044,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_result_json_membership_id_matches_env",
+                "status": "passed",
+                "duration": 0.0004281005822122097,
+                "start": 1779383933.6059723,
+                "stop": 1779383933.6065469,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_result_json_role_slug_is_admin",
+                "status": "passed",
+                "duration": 0.000411981251090765,
+                "start": 1779383933.6067145,
+                "stop": 1779383933.6072571,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_live_membership_role_is_admin_on_workos",
+                "status": "passed",
+                "duration": 0.7900759726762772,
+                "start": 1779383933.6074219,
+                "stop": 1779383934.3976872,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

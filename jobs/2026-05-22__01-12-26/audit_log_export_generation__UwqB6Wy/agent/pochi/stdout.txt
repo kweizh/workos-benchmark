@@ -1,0 +1,74 @@
+- Initializing MCP connections...
+You
+# WorkOS Audit Logs: Create, Poll, and Download an Export ## Background WorkOS Audit Logs lets you ingest user activity events for an organization and later export them as a CSV file using the Audit Log Export API. The Node.js SDK exposes two relevant methods: - `workos.auditLogs.createExport({ organizationId, rangeStart, rangeEnd, ... })` — kicks off an asynchronous export job and returns an export object whose `state` starts as `pending`. - `workos.auditLogs.getExport(id)` — fetches the current state of the export. Once `state` is `ready`, a short-lived `url` is returned that points to the generated CSV file. Your job is to write a Node.js script that uses the official `@workos-inc/node` SDK to start an export for the last 24 hours, poll until the export is `ready`, and then download the CSV file to disk. A pre-existing Node.js project lives at `/home/user/myproject` with the official `@workos-inc/node` SDK already installed (see `node_modules/@workos-inc/node/package.json`). The environment already provides `WORKOS_API_KEY` and `WORKOS_ORGANIZATION_ID`. ## Requirements Implement a single Node.js script at `/home/user/myproject/index.js` that, when executed via `node index.js`: 1. Reads `WORKOS_API_KEY` and `WORKOS_ORGANIZATION_ID` from the environment and instantiates the SDK as `new WorkOS(process.env.WORKOS_API_KEY)`. If either env var is missing, exit non-zero. 2. Computes a 24-hour window: - `rangeEnd = new Date()` (now). - `rangeStart = new Date(rangeEnd.getTime() - 24 * 60 * 60 * 1000)` (24 hours ago). 3. Calls `workos.auditLogs.createExport({ organizationId: process.env.WORKOS_ORGANIZATION_ID, rangeStart, rangeEnd })` exactly once to start the export. 4. Captures the returned export object's `id` and writes a JSON document to `/home/user/myproject/export.json` with the following exact top-level fields: - `exportId` — the `id` returned by `createExport`. - `state` — the final state observed after polling (must be `"ready"`). - `url` — the signed download URL returned by `getExport` once `state === "ready"`. - `rangeStart` — ISO-8601 string for `rangeStart`. - `rangeEnd` — ISO-8601 string for `rangeEnd`. 5. Polls `workos.auditLogs.getExport(exportId)` until `state === "ready"`: - Sleep at least 2 seconds between polls. - Time out after 5 minutes (300 seconds) and exit non-zero if the export never becomes `ready`. 6. Once `ready`, downloads the export contents from the returned `url` (e.g. with `fetch` or `https.get`) and writes the raw response body to `/home/user/myproject/audit.csv`. The file must exist and be readable. If the export is empty for the time window, an empty (zero-byte) file is acceptable; what matters is that the script wrote whatever the URL returned. 7. Logs progress to stdout and exits with status code `0` on success, non-zero on failure. ## Implementation Guide 1. `cd /home/user/myproject`. 2. Confirm `@workos-inc/node` is already installed (do not reinstall a different version). 3. Author `index.js` (CommonJS — `package.json` already uses CommonJS). A typical shape: ```javascript const fs = require('fs'); const { WorkOS } = require('@workos-inc/node'); async function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); } async function main() { const apiKey = process.env.WORKOS_API_KEY; const organizationId = process.env.WORKOS_ORGANIZATION_ID; if (!apiKey || !organizationId) { console.error('WORKOS_API_KEY and WORKOS_ORGANIZATION_ID must be set'); process.exit(1); } const workos = new WorkOS(apiKey); const rangeEnd = new Date(); const rangeStart = new Date(rangeEnd.getTime() - 24 * 60 * 60 * 1000); const created = await workos.auditLogs.createExport({ organizationId, rangeStart, rangeEnd, }); const exportId = created.id; console.log(`created export ${exportId}, initial state=${created.state}`); const deadline = Date.now() + 5 * 60 * 1000; let current = created; while (current.state !== 'ready') { if (Date.now() > deadline) { console.error(`export ${exportId} never reached ready (last state=${current.state})`); process.exit(2); } await sleep(3000); current = await workos.auditLogs.getExport(exportId); console.log(`polled export ${exportId}, state=${current.state}`); } const url = current.url; const res = await fetch(url); if (!res.ok) { console.error(`download failed with status ${res.status}`); process.exit(3); } const buf = Buffer.from(await res.arrayBuffer()); fs.writeFileSync('/home/user/myproject/audit.csv', buf); fs.writeFileSync( '/home/user/myproject/export.json', JSON.stringify({ exportId, state: current.state, url, rangeStart: rangeStart.toISOString(), rangeEnd: rangeEnd.toISOString(), }, null, 2), ); console.log('done'); } main().catch((err) => { console.error(err); process.exit(1); }); ``` 4. Execute the script once: `node index.js`. This produces both `/home/user/myproject/export.json` and `/home/user/myproject/audit.csv`. ## Constraints - Project path: `/home/user/myproject` - Output JSON: `/home/user/myproject/export.json` (must contain `exportId`, `state == "ready"`, `url`, `rangeStart`, `rangeEnd`) - CSV file: `/home/user/myproject/audit.csv` (must exist) - You MUST use the real WorkOS Audit Logs API via the `@workos-inc/node` SDK with `WORKOS_API_KEY` and `WORKOS_ORGANIZATION_ID`. NEVER mock or stub the WorkOS client. - You MUST call `workos.auditLogs.createExport(...)` exactly once and then poll `workos.auditLogs.getExport(id)` until `state === "ready"`. - Do not delete or modify any existing files outside `/home/user/myproject`. ## Integrations - WorkOS (Audit Logs API — requires `WORKOS_API_KEY` and `WORKOS_ORGANIZATION_ID`).   
+
+Pochi
+💭 Thinking for 496 characters   
+I'll help you create a Node.js script to work with WorkOS Audit Logs. Let me start by exploring the project structure and then implement the script.   
+📂 Listing files in /home/user/myproject ✔ 
+💭 Thinking for 117 characters   
+📖 Reading /home/user/myproject/package.json ✔ 
+💭 Thinking for 180 characters   
+📂 Listing files in /home/user/myproject/node_modules/@workos-inc/node ✔ 
+💭 Thinking for 369 characters   
+✏️  Writing /home/user/myproject/index.js ✔ 
+💭 Thinking for 211 characters   
+💫 Executing  ✖ "Error repairing tool call: No object generated: could not parse the response."
+💭 Thinking for 111 characters   
+💫 Executing  ✖ "Error repairing tool call: No object generated: could not parse the response."
+💭 Thinking for 257 characters   
+📂 Listing files in /home/user/myproject ✔ 
+💭 Thinking for 156 characters   
+💫 Executing  ✖ "Error repairing tool call: No object generated: could not parse the response."
+💭 Thinking for 105 characters   
+💫 Executing cd /home/user/myproject && ls -la ✔ 
+💭 Thinking for 193 characters   
+💫 Executing echo "WORKOS_API_KEY=$WORKOS_API_KEY" && echo "WORKOS_ORGANIZATION_ID=$WORKOS_ORGANIZATION_ID" ✔ 
+💭 Thinking for 124 characters   
+💫 Executing  ✖ "Error repairing tool call: No object generated: could not parse the response."
+💭 Thinking for 253 characters   
+💫 Executing  ✖ "Error repairing tool call: No object generated: could not parse the response."
+💭 Thinking for 163 characters   
+💫 Executing node --version ✔ 
+💭 Thinking for 102 characters   
+💫 Executing cd /home/user/myproject && node --check index.js && echo "Syntax OK" ✔ 
+💭 Thinking for 350 characters   
+💫 Executing  ✖ "Error repairing tool call: No object generated: could not parse the response."
+💭 Thinking for 425 characters   
+📖 Reading /home/user/myproject/index.js ✔ 
+💭 Thinking for 161 characters   
+🛠️ Tool startBackgroundJob ✔ 
+💭 Thinking for 87 characters   
+💫 Executing sleep 5 ✔ 
+💭 Thinking for 50 characters   
+🛠️ Tool readBackgroundJobOutput ✔ 
+💭 Thinking for 200 characters   
+📖 Reading /home/user/myproject/export.json ✔ 
+💭 Thinking for 218 characters   
+📖 Reading /home/user/myproject/audit.csv ✔ 
+💭 Thinking for 244 characters   
+💫 Executing cd /home/user/myproject && ls -lh export.json audit.csv ✔ 
+💭 Thinking for 620 characters   
+🎉 Task Completed
+Successfully created and executed the WorkOS Audit Logs export script. The implementation:
+
+**Created `/home/user/myproject/index.js`** with the following functionality:
+- Validates `WORKOS_API_KEY` and `WORKOS_ORGANIZATION_ID` environment variables
+- Computes 24-hour time window (rangeEnd = now, rangeStart = 24 hours ago)
+- Calls `workos.auditLogs.createExport()` exactly once to start the export
+- Polls `workos.auditLogs.getExport()` until state is "ready" (with 3-second sleep intervals and 5-minute timeout)
+- Downloads the CSV file from the signed URL using fetch
+- Writes `/home/user/myproject/export.json` with all required fields: `exportId`, `state` ("ready"), `url`, `rangeStart`, `rangeEnd`
+- Writes `/home/user/myproject/audit.csv` with the downloaded audit log data
+- Logs progress to stdout and exits with appropriate status codes
+
+**Execution Results:**
+- Export ID: `audit_log_export_01KS5RP42QK6M8N3YQQEHPSC4V`
+- State reached: `ready`
+- Files created:
+  - `/home/user/myproject/export.json` (772 bytes)
+  - `/home/user/myproject/audit.csv` (273 bytes)
+- Exit code: 0 (success)
+
+The script successfully used the real WorkOS Audit Logs API via the `@workos-inc/node` SDK with the provided credentials, created the export, polled until ready, and downloaded the CSV file containing audit log data for the last 24 hours.   
+  

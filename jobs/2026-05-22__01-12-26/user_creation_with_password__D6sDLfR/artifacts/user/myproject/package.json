@@ -1,0 +1,10 @@
+{
+  "name": "user_creation_with_password",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Create a WorkOS user with derived email/password.",
+  "type": "commonjs",
+  "dependencies": {
+    "@workos-inc/node": "^7.0.0"
+  }
+}

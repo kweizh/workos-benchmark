@@ -1,0 +1,64 @@
+{
+    "id": "32610e3b-daae-4502-b2ae-100ba42570dd",
+    "started_at": "2026-05-22T01:12:27.982321",
+    "updated_at": "2026-05-22T01:36:17.119652",
+    "finished_at": "2026-05-22T01:36:17.119652",
+    "n_total_trials": 20,
+    "stats": {
+        "n_completed_trials": 20,
+        "n_errored_trials": 1,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "pochi__glm-4.7__tasks": {
+                "n_trials": 20,
+                "n_errors": 1,
+                "metrics": [
+                    {
+                        "mean": 0.75
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "audit_log_export_generation__UwqB6Wy",
+                            "bulk_user_export_csv__Vd7sJ7D",
+                            "mfa_totp_factor_enrollment__98VhjGS",
+                            "organization_membership_status_d__9NbQUvG",
+                            "passwordless_email_otp_authentic__AcDMxrP",
+                            "roles_creation_and_assignment__FK4xMdh",
+                            "user_invitation_creation__xicYCAX",
+                            "widgets_users_table_token__XJidHzY",
+                            "admin_portal_dsync_link_generati__CXcNePJ",
+                            "email_verification_send__fw443zt",
+                            "events_listing__CfvyinA",
+                            "invitation_revocation__q9xF8ji",
+                            "organization_listing_pagination__2tsZmtt",
+                            "organization_memberships_listing__2m5TBxz",
+                            "user_creation_with_password__D6sDLfR"
+                        ],
+                        "0.0": [
+                            "organization_domain_addition__4u9obAq",
+                            "invitation_listing__eqcVY8Y",
+                            "organization_creation__KoiRDJu",
+                            "organization_external_id_update__dNJvGn9",
+                            "organization_metadata_update__MS97jKE"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "AgentTimeoutError": [
+                        "widgets_users_table_token__XJidHzY"
+                    ]
+                }
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 350673,
+        "cost_usd": null
+    }
+}

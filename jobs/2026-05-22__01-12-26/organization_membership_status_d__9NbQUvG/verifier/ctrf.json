@@ -1,0 +1,65 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 5,
+            "passed": 5,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779383710.2986841,
+            "stop": 1779383711.6160948
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_required_env_vars_present",
+                "status": "passed",
+                "duration": 0.0004665190353989601,
+                "start": 1779383710.328333,
+                "stop": 1779383710.3290007,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_deactivate_script_exists",
+                "status": "passed",
+                "duration": 0.0003941035829484463,
+                "start": 1779383710.3292267,
+                "stop": 1779383710.329753,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_membership_json_exists_and_is_valid_json",
+                "status": "passed",
+                "duration": 0.00045452266931533813,
+                "start": 1779383710.3299215,
+                "stop": 1779383710.3305027,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_membership_json_has_inactive_status",
+                "status": "passed",
+                "duration": 0.0004156641662120819,
+                "start": 1779383710.3306704,
+                "stop": 1779383710.33121,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workos_api_reflects_inactive_status",
+                "status": "passed",
+                "duration": 1.2835667501203716,
+                "start": 1779383710.3313794,
+                "stop": 1779383711.6154075,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

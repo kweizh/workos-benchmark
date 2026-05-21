@@ -1,0 +1,10 @@
+{
+  "name": "workos-bulk-user-export",
+  "version": "1.0.0",
+  "private": true,
+  "description": "WorkOS bulk user export to CSV",
+  "main": "index.js",
+  "dependencies": {
+    "@workos-inc/node": "^7.82.0"
+  }
+}

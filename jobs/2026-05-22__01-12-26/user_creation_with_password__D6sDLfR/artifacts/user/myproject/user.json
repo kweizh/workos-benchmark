@@ -1,0 +1,15 @@
+{
+  "object": "user",
+  "id": "user_01KS5SMJ3XJKQ083WQXX2F7HPX",
+  "email": "pochi-user-zr-user-creation-with-password--d6sdlfr@pochi-benchmark.example",
+  "emailVerified": false,
+  "firstName": "Pochi",
+  "profilePictureUrl": null,
+  "lastName": "Benchmark",
+  "lastSignInAt": null,
+  "locale": null,
+  "createdAt": "2026-05-21T17:34:22.840Z",
+  "updatedAt": "2026-05-21T17:34:22.840Z",
+  "externalId": null,
+  "metadata": {}
+}

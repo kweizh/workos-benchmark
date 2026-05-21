@@ -1,0 +1,59 @@
+- Initializing MCP connections...
+You
+# Deactivate an Existing WorkOS Organization Membership ## Background A WorkOS organization membership represents a user's relationship to a specific organization. Memberships have a `status` of `active`, `inactive`, or `pending`. The WorkOS Node SDK exposes `workos.userManagement.deactivateOrganizationMembership(id)` (which targets `PUT /user_management/organization_memberships/:id/deactivate`) to transition an `active` membership to `inactive`. In this task you will write a small Node.js script that deactivates a specific organization membership using the WorkOS Node SDK and persists the returned membership object to disk. ## Requirements 1. The project lives at `/home/user/myproject`. It already has `package.json` with the `@workos-inc/node` SDK installed. 2. Implement a script at `/home/user/myproject/deactivate_membership.js` that: - Reads `WORKOS_API_KEY` and `WORKOS_ORG_MEMBERSHIP_ID` from the process environment. - Initializes the WorkOS client with `const workos = new WorkOS(process.env.WORKOS_API_KEY)`. - Calls `workos.userManagement.deactivateOrganizationMembership(process.env.WORKOS_ORG_MEMBERSHIP_ID)`. - Writes the JSON serialization of the returned organization membership object to `/home/user/myproject/membership.json` (pretty-printed with 2-space indentation). 3. Run the script with `node deactivate_membership.js` so that `/home/user/myproject/membership.json` exists after the run. ## Implementation Guide 1. `cd /home/user/myproject` 2. Create `deactivate_membership.js` using the WorkOS Node SDK (`@workos-inc/node`) as described above. 3. Execute `node deactivate_membership.js`. 4. Confirm `/home/user/myproject/membership.json` contains the deactivated membership (its `status` will be `"inactive"`). ## Constraints - Project path: `/home/user/myproject` - Output file: `/home/user/myproject/membership.json` - Use the real WorkOS API. Do NOT mock the SDK or HTTP layer. - Use the SDK method `workos.userManagement.deactivateOrganizationMembership(id)` (not a hand-rolled HTTP call). - The script must be idempotent: deactivating an already-inactive membership is a no-op on the WorkOS side and must still succeed. ## Integrations - WorkOS (real API key and a real organization membership id provided via env vars).   
+
+Pochi
+💭 Thinking for 845 characters   
+I'll help you create and run the script to deactivate a WorkOS organization membership. Let me start by examining the project structure.   
+📂 Listing files in /home/user/myproject ✔ 
+💭 Thinking for 122 characters   
+📖 Reading /home/user/myproject/package.json ✔ 
+💭 Thinking for 390 characters   
+Now I'll create the script to deactivate the organization membership:   
+✏️  Writing /home/user/myproject/deactivate_membership.js ✔ 
+💭 Thinking for 691 characters   
+Now I'll run the script:   
+💫 Executing cd /home/user/myproject && node deactivate_membership.js ✔ 
+💭 Thinking for 167 characters   
+Perfect! The script executed successfully. Let me verify the output file was created correctly:   
+📖 Reading /home/user/myproject/membership.json ✔ 
+💭 Thinking for 471 characters   
+🎉 Task Completed
+Successfully created and executed the WorkOS organization membership deactivation script.
+
+**Script created at:** `/home/user/myproject/deactivate_membership.js`
+
+**Execution results:**
+- Successfully deactivated organization membership ID: `REDACTED`
+- Membership status changed to: `inactive`
+- Output file created at: `/home/user/myproject/membership.json`
+
+**membership.json contents (2-space indentation):**
+```json
+{
+  "object": "organization_membership",
+  "id": "REDACTED",
+  "userId": "user_01KPZREB8VAGNQHZ23M1XKSJVA",
+  "organizationId": "REDACTED",
+  "organizationName": "Test Organization",
+  "status": "inactive",
+  "createdAt": "2026-05-14T09:28:25.187Z",
+  "updatedAt": "2026-05-14T10:11:28.543Z",
+  "role": {
+    "slug": "admin"
+  },
+  "roles": [
+    {
+      "slug": "admin"
+    }
+  ]
+}
+```
+
+The script successfully:
+1. Read `WORKOS_API_KEY` and `WORKOS_ORG_MEMBERSHIP_ID` from environment variables
+2. Initialized the WorkOS client with the API key
+3. Called `workos.userManagement.deactivateOrganizationMembership()` with the membership ID
+4. Persisted the returned membership object to `/home/user/myproject/membership.json` with 2-space indentation
+5. The membership status is now `"inactive"` as expected   
+  
