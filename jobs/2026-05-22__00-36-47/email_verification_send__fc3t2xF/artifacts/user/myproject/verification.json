@@ -1,0 +1,17 @@
+{
+  "user": {
+    "object": "user",
+    "id": "REDACTED",
+    "email": "user_1777039325343@example.com",
+    "emailVerified": false,
+    "firstName": "Test",
+    "profilePictureUrl": null,
+    "lastName": "User",
+    "lastSignInAt": null,
+    "locale": null,
+    "createdAt": "2026-04-24T14:02:05.722Z",
+    "updatedAt": "2026-04-24T14:02:05.722Z",
+    "externalId": null,
+    "metadata": {}
+  }
+}

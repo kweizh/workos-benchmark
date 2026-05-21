@@ -1,0 +1,61 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 4,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779381582497,
+            "stop": 1779381583155
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_required_env_vars_present",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779381582522,
+                "stop": 1779381582523,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_create_org_script_exists",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779381582523,
+                "stop": 1779381582524,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_org_json_exists_and_valid",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779381582524,
+                "stop": 1779381582525,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workos_api_reflects_created_org",
+                "status": "passed",
+                "duration": 629,
+                "start": 1779381582525,
+                "stop": 1779381583154,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

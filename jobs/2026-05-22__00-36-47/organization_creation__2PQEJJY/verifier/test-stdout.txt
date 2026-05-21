@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0
+collected 4 items
+
+tests/test_final_state.py ....                                           [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_required_env_vars_present
+PASSED tests/test_final_state.py::test_create_org_script_exists
+PASSED tests/test_final_state.py::test_org_json_exists_and_valid
+PASSED tests/test_final_state.py::test_workos_api_reflects_created_org
+============================== 4 passed in 0.66s ===============================

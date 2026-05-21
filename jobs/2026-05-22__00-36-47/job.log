@@ -1,0 +1,786 @@
+Skipping image OS validation for hb__invitation_revocation: docker inspect returned 1
+Skipping image OS validation for hb__invitation_listing: docker inspect returned 1
+Skipping image OS validation for hb__organization_creation: docker inspect returned 1
+Skipping image OS validation for hb__admin_portal_dsync_link_generation: docker inspect returned 1
+Skipping image OS validation for hb__email_verification_send: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Running command: apt-get update && apt-get install -y curl ripgrep
+Running command: apt-get update && apt-get install -y curl ripgrep
+Running command: apt-get update && apt-get install -y curl ripgrep
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-admin-portal-dsync-link-generati--9zcn2lm > /logs/artifacts/run-id && echo admin_portal_dsync_link_generati__9ZcN2LM > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Running command: echo zr-invitation-revocation--xg9xwaf > /logs/artifacts/run-id && echo invitation_revocation__xg9XwAF > /logs/artifacts/trial_id
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Generate an Admin Portal Directory Sync Setup Link
+
+## Background
+Generate an Admin Portal link to let an organization administrator configure their own Directory Sync (intent: `dsync`).
+
+## Requirements
+1. Project lives at `/home/user/myproject`.
+2. Implement `/home/user/myproject/portal_dsync_link.js` that:
+   - Reads `WORKOS_API_KEY` and `WORKOS_ORGANIZATION_ID`.
+   - Calls `workos.portal.generateLink({ organization, intent: 'dsync' })`.
+   - Writes the response object as JSON to `/home/user/myproject/portal_link.json`.
+3. Run `node portal_dsync_link.js`.
+
+## Constraints
+- Real WorkOS API; no mocks.
+- The `link` must be an HTTPS URL on a WorkOS domain.
+
+## Integrations
+- WorkOS (Admin Portal API).
+
+EOF
+Command outputs captured
+Running command: pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Send and Revoke a WorkOS Invitation
+
+## Background
+Send an invitation to an email address inside an organization, then immediately revoke it. The invitee email is derived from `ZEALT_RUN_ID` so reruns are isolated.
+
+## Requirements
+1. Project at `/home/user/myproject`.
+2. Implement `/home/user/myproject/revoke_invitation.js` that:
+   - Reads `WORKOS_API_KEY`, `WORKOS_ORGANIZATION_ID`, and `ZEALT_RUN_ID`.
+   - Derives the invitee email as `pochi-invite-${(process.env.ZEALT_RUN_ID || 'default').toLowerCase()}@pochi-benchmark.example`.
+   - Calls `workos.userManagement.sendInvitation({ email, organizationId: process.env.WORKOS_ORGANIZATION_ID })`. If the invitation already exists (e.g., from a previous run), look it up via `workos.userManagement.listInvitations({ email, organizationId })` so the script is idempotent.
+   - Calls `workos.userManagement.revokeInvitation(invitation.id)`.
+   - Writes the revoked invitation object to `/home/user/myproject/invitation.json`.
+3. Run `node revoke_invitation.js`.
+
+## Constraints
+- Real WorkOS API; no mocks.
+
+## Integrations
+- WorkOS (User Management Invitations API).
+
+EOF
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-invitation-listing--as7aehd > /logs/artifacts/run-id && echo invitation_listing__As7AeHD > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# List WorkOS Invitations for an Organization
+
+## Background
+Enumerate every invitation associated with a WorkOS organization, paginating with `limit: 2` to exercise the cursor.
+
+## Requirements
+1. Project at `/home/user/myproject`.
+2. Implement `/home/user/myproject/list_invitations.js` that:
+   - Reads `WORKOS_API_KEY` and `WORKOS_ORGANIZATION_ID`.
+   - Pages through `workos.userManagement.listInvitations({ organizationId: process.env.WORKOS_ORGANIZATION_ID, limit: 2, after })`.
+   - Writes an array of `{ id, email, state, organization_id }` (strings) to `/home/user/myproject/invitations.json`.
+3. Run `node list_invitations.js`.
+
+## Constraints
+- Real WorkOS API; no mocks. Page size MUST be 2.
+
+## Integrations
+- WorkOS (User Management Invitations API).
+
+EOF
+Running command: echo zr-organization-creation--2pqejjy > /logs/artifacts/run-id && echo organization_creation__2PQEJJY > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Create a New WorkOS Organization via the Node SDK
+
+## Background
+WorkOS Organizations are the top-level tenant resource. In this task you will use the official `@workos-inc/node` SDK to create a brand new organization and persist the returned organization object to disk so other tooling can pick it up.
+
+## Requirements
+1. The project lives at `/home/user/myproject`. It already has `package.json` with `@workos-inc/node` installed.
+2. Implement a script at `/home/user/myproject/create_org.js` that:
+   - Reads `WORKOS_API_KEY` and `ZEALT_RUN_ID` from the process environment.
+   - Initializes the WorkOS client: `const workos = new WorkOS(process.env.WORKOS_API_KEY)`.
+   - Computes the organization name as `pochi-benchmark-org-${process.env.ZEALT_RUN_ID || 'default'}` (this guarantees the org name is unique per run and idempotent within a run).
+   - Calls `workos.organizations.createOrganization({ name })` with that computed name. If WorkOS rejects the call because an organization with that name already exists, the script must fall back to looking the org up via `workos.organizations.listOrganizations({})` filtering by name, so re-runs remain idempotent.
+   - Writes the JSON serialization (pretty-printed, 2-space indent) of the resulting organization to `/home/user/myproject/org.json`.
+3. Run the script with `node create_org.js` so that `/home/user/myproject/org.json` exists.
+
+## Implementation Guide
+1. `cd /home/user/myproject`
+2. Create `create_org.js` using `@workos-inc/node` per the description above.
+3. Execute `node create_org.js`.
+4. Confirm `/home/user/myproject/org.json` exists with the newly created organization's `id` and `name`.
+
+## Constraints
+- Use the real WorkOS API. Do NOT mock the SDK or HTTP layer.
+- Do NOT hardcode the API key.
+- The organization id field returned by the SDK (`id`) must be a non-empty `org_*` string.
+
+## Integrations
+- WorkOS (real API key via env var; org name is derived from ZEALT_RUN_ID).
+
+EOF
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-email-verification-send--fc3t2xf > /logs/artifacts/run-id && echo email_verification_send__fc3t2xF > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Send a Verification Email to a WorkOS User
+
+## Background
+Trigger WorkOS to send an email verification message to a given user via `sendVerificationEmail`.
+
+## Requirements
+1. Project at `/home/user/myproject`.
+2. Implement `/home/user/myproject/send_verification.js` that:
+   - Reads `WORKOS_API_KEY` and `WORKOS_USER_ID`.
+   - Calls `workos.userManagement.sendVerificationEmail({ userId: process.env.WORKOS_USER_ID })`.
+   - Writes the returned object as JSON to `/home/user/myproject/verification.json`.
+3. Run `node send_verification.js`.
+
+## Constraints
+- Real WorkOS API; no mocks.
+- Should not throw; on success a JSON object must be persisted.
+
+## Integrations
+- WorkOS (User Management API).
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Skipping image OS validation for hb__organization_external_id_update: docker inspect returned 1
+Skipping image OS validation for hb__organization_listing_pagination: docker inspect returned 1
+Skipping image OS validation for hb__events_listing: docker inspect returned 1
+Skipping image OS validation for hb__organization_metadata_update: docker inspect returned 1
+Skipping image OS validation for hb__user_creation_with_password: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Running command: apt-get update && apt-get install -y curl ripgrep
+Running command: apt-get update && apt-get install -y curl ripgrep
+Running command: apt-get update && apt-get install -y curl ripgrep
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-organization-external-id-update--dwflvcf > /logs/artifacts/run-id && echo organization_external_id_update__dwfLVcf > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Command outputs captured
+Running command: pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Update an Organization's external_id
+
+## Background
+Set the `external_id` of an existing WorkOS organization using the Node SDK, then persist the returned org object for downstream tools.
+
+## Requirements
+1. Project lives at `/home/user/myproject`.
+2. Implement `/home/user/myproject/update_external_id.js` that:
+   - Reads `WORKOS_API_KEY`, `WORKOS_ORGANIZATION_ID`, and `ZEALT_RUN_ID`.
+   - Derives the new external id as `pochi-ext-${process.env.ZEALT_RUN_ID || 'default'}`. The value is fully derived from `ZEALT_RUN_ID`, so re-runs and parallel runs are isolated.
+   - Calls `workos.organizations.updateOrganization({ organization: WORKOS_ORGANIZATION_ID, externalId })`.
+   - Writes the returned organization object (pretty JSON, 2-space) to `/home/user/myproject/org.json`.
+3. Run `node update_external_id.js`.
+
+## Constraints
+- Use real WorkOS API. Do NOT mock.
+- Use the camelCase SDK field `externalId`.
+
+## Integrations
+- WorkOS (Organizations API).
+
+EOF
+Running command: echo zr-events-listing--qxxqca6 > /logs/artifacts/run-id && echo events_listing__qXXQcA6 > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# List WorkOS Events via the Events API
+
+## Background
+The WorkOS Events API is the pull-based alternative to webhooks. Use `workos.events.listEvents({ events: ['organization.created'] })` to fetch a slice of recent events and persist them.
+
+## Requirements
+1. Project at `/home/user/myproject`.
+2. Implement `/home/user/myproject/list_events.js` that:
+   - Reads `WORKOS_API_KEY` and instantiates the SDK.
+   - Calls `workos.events.listEvents({ events: ['organization.created'], limit: 10 })`.
+   - Maps each event to `{ id, event, created_at }` (strings) and writes the JSON array to `/home/user/myproject/events.json`.
+3. Run `node list_events.js`.
+
+## Constraints
+- Real WorkOS API; no mocks.
+- Output filter must be exactly `events: ['organization.created']`.
+
+## Integrations
+- WorkOS (Events API).
+
+EOF
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-organization-metadata-update--5m8nzad > /logs/artifacts/run-id && echo organization_metadata_update__5M8nzaD > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Set a Metadata Key on an Existing WorkOS Organization
+
+## Background
+WorkOS organizations support a free-form `metadata` map (string keys/values). In this task you will set a metadata key on an existing organization using the SDK and persist the response.
+
+## Requirements
+1. Project lives at `/home/user/myproject`.
+2. Implement `/home/user/myproject/update_metadata.js` that:
+   - Reads `WORKOS_API_KEY`, `WORKOS_ORGANIZATION_ID`, and `ZEALT_RUN_ID`.
+   - Uses the fixed metadata key `pochi_benchmark_marker` and value `pochi-mv-${process.env.ZEALT_RUN_ID || 'default'}`.
+   - First reads the current organization with `workos.organizations.getOrganization(...)` to preserve existing metadata.
+   - Calls `workos.organizations.updateOrganization({ organization, metadata: { ...existing, pochi_benchmark_marker: value } })`.
+   - Writes the returned organization as JSON (pretty, 2-space) to `/home/user/myproject/org.json`.
+3. Run `node update_metadata.js`.
+
+## Constraints
+- Use real WorkOS API; do NOT mock.
+- Idempotent: re-running with the same ZEALT_RUN_ID must result in the same metadata key/value.
+
+## Integrations
+- WorkOS (Organizations API).
+
+EOF
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-organization-listing-pagination--srazsxc > /logs/artifacts/run-id && echo organization_listing_pagination__SrAZSXC > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Paginate WorkOS Organizations to JSON
+
+## Background
+Use the `@workos-inc/node` SDK to enumerate every WorkOS organization accessible to the API key by paginating with the `listMetadata.after` cursor, and persist the results to a JSON file.
+
+## Requirements
+1. The project lives at `/home/user/myproject`.
+2. Implement a script at `/home/user/myproject/list_orgs.js` that:
+   - Reads `WORKOS_API_KEY` from the process environment.
+   - Initializes the WorkOS client.
+   - Pages through `workos.organizations.listOrganizations({ limit: 2, after })` using the `listMetadata.after` cursor until no more pages remain.
+   - Collects every organization, preserving the iteration order.
+   - Writes a pretty-printed JSON array (2-space indent) to `/home/user/myproject/organizations.json` where each element has exactly the keys `id` and `name` (strings).
+3. Run the script with `node list_orgs.js`.
+
+## Constraints
+- Use the real WorkOS API; do NOT mock.
+- Page size MUST be `limit: 2` to exercise pagination.
+- The order of the JSON array must follow the SDK iteration order.
+
+## Integrations
+- WorkOS (User Management / Organizations API).
+
+EOF
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-user-creation-with-password--pphzhpa > /logs/artifacts/run-id && echo user_creation_with_password__PPhzhPa > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Create a WorkOS User with Email + Password
+
+## Background
+Use User Management to create a new WorkOS user account with email and password credentials. The email is derived from `ZEALT_RUN_ID` so each run creates a distinct user.
+
+## Requirements
+1. Project at `/home/user/myproject`.
+2. Implement `/home/user/myproject/create_user.js` that:
+   - Reads `WORKOS_API_KEY` and `ZEALT_RUN_ID`.
+   - Derives the user email as `pochi-user-${(process.env.ZEALT_RUN_ID || 'default').toLowerCase()}@pochi-benchmark.example`.
+   - Uses a fixed strong password literal `PochiBenchmark!2025`.
+   - Calls `workos.userManagement.createUser({ email, password, firstName: 'Pochi', lastName: 'Benchmark' })`. If WorkOS returns an `email already exists` error, fall back to `workos.userManagement.listUsers({ email })` and read the first match so the script is idempotent.
+   - Writes the resulting user as JSON to `/home/user/myproject/user.json`.
+3. Run `node create_user.js`.
+
+## Constraints
+- Real WorkOS API; no mocks.
+- `id` field must match `^user_`.
+
+## Integrations
+- WorkOS (User Management API).
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Skipping image OS validation for hb__organization_memberships_listing: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-organization-memberships-listing--4pezqu4 > /logs/artifacts/run-id && echo organization_memberships_listing__4Pezqu4 > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Paginate Organization Memberships
+
+## Background
+List every organization membership (user-to-org relationship) attached to a given WorkOS organization.
+
+## Requirements
+1. Project at `/home/user/myproject`.
+2. Implement `/home/user/myproject/list_memberships.js` that:
+   - Reads `WORKOS_API_KEY` and `WORKOS_ORGANIZATION_ID`.
+   - Pages through `workos.userManagement.listOrganizationMemberships({ organizationId, limit: 2, after })`.
+   - Writes a JSON array of `{ id, user_id, organization_id, status }` (strings) to `/home/user/myproject/memberships.json`.
+3. Run `node list_memberships.js`.
+
+## Constraints
+- Real WorkOS API; no mocks. Page size 2.
+
+## Integrations
+- WorkOS (User Management API).
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.

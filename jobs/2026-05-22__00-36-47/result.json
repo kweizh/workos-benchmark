@@ -1,0 +1,51 @@
+{
+    "id": "85433e7a-b513-4403-8ad0-f6b152fcc81c",
+    "started_at": "2026-05-22T00:36:49.625989",
+    "updated_at": "2026-05-22T00:46:34.908131",
+    "finished_at": "2026-05-22T00:46:34.908131",
+    "n_total_trials": 11,
+    "stats": {
+        "n_completed_trials": 11,
+        "n_errored_trials": 0,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "pochi__gemini-3-flash__tasks2": {
+                "n_trials": 11,
+                "n_errors": 0,
+                "metrics": [
+                    {
+                        "mean": 0.8181818181818182
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "admin_portal_dsync_link_generati__9ZcN2LM",
+                            "invitation_revocation__xg9XwAF",
+                            "organization_creation__2PQEJJY",
+                            "invitation_listing__As7AeHD",
+                            "email_verification_send__fc3t2xF",
+                            "organization_listing_pagination__SrAZSXC",
+                            "user_creation_with_password__PPhzhPa",
+                            "events_listing__qXXQcA6",
+                            "organization_memberships_listing__4Pezqu4"
+                        ],
+                        "0.0": [
+                            "organization_external_id_update__dwfLVcf",
+                            "organization_metadata_update__5M8nzaD"
+                        ]
+                    }
+                },
+                "exception_stats": {}
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 185031,
+        "cost_usd": null
+    }
+}

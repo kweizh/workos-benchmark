@@ -1,0 +1,45 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0
+collected 4 items
+
+tests/test_final_state.py ..FF                                           [100%]
+
+=================================== FAILURES ===================================
+_____________________________ test_org_json_local ______________________________
+
+    def test_org_json_local():
+>       with open(ORG_JSON) as f:
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/user/myproject/org.json'
+
+tests/test_final_state.py:31: FileNotFoundError
+_________________________ test_workos_api_external_id __________________________
+
+    def test_workos_api_external_id():
+        url = f"https://api.workos.com/organizations/{WORKOS_ORGANIZATION_ID}"
+        req = urllib.request.Request(url, headers={
+            "Authorization": f"Bearer {WORKOS_API_KEY}",
+            "Accept": "application/json",
+        })
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                body = json.loads(resp.read().decode("utf-8"))
+        except urllib.error.HTTPError as e:
+            pytest.fail(f"WorkOS API failed: HTTP {e.code} {e.read().decode('utf-8', errors='replace')}")
+>       assert body.get("external_id") == EFFECTIVE, (
+            f"Expected live API to return external_id {EFFECTIVE!r}, got {body.get('external_id')!r}"
+        )
+E       AssertionError: Expected live API to return external_id 'pochi-ext-zr-organization-external-id-update--dwflvcf', got None
+E       assert None == 'pochi-ext-zr-organization-external-id-update--dwflvcf'
+E        +  where None = <built-in method get of dict object at 0x7def897be480>('external_id')
+E        +    where <built-in method get of dict object at 0x7def897be480> = {'allow_profiles_outside_organization': False, 'created_at': '2026-04-24T11:58:40.065Z', 'domains': [{'created_at': '2....com', 'id': 'org_domain_01KPZNPF3652RK8MWP42F2H8KB', 'object': 'organization_domain', ...}], 'external_id': None, ...}.get
+
+tests/test_final_state.py:50: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_env
+PASSED tests/test_final_state.py::test_script_exists
+FAILED tests/test_final_state.py::test_org_json_local - FileNotFoundError: [E...
+FAILED tests/test_final_state.py::test_workos_api_external_id - AssertionErro...
+========================= 2 failed, 2 passed in 0.67s ==========================

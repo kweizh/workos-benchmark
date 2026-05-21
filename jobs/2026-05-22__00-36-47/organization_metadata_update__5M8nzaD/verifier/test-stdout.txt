@@ -1,0 +1,46 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0
+collected 4 items
+
+tests/test_final_state.py ..FF                                           [100%]
+
+=================================== FAILURES ===================================
+_____________________________ test_org_json_local ______________________________
+
+    def test_org_json_local():
+>       with open(ORG_JSON) as f:
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/user/myproject/org.json'
+
+tests/test_final_state.py:29: FileNotFoundError
+___________________________ test_workos_api_metadata ___________________________
+
+    def test_workos_api_metadata():
+        url = f"https://api.workos.com/organizations/{WORKOS_ORGANIZATION_ID}"
+        req = urllib.request.Request(url, headers={
+            "Authorization": f"Bearer {WORKOS_API_KEY}",
+            "Accept": "application/json",
+        })
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                body = json.loads(resp.read().decode("utf-8"))
+        except urllib.error.HTTPError as e:
+            pytest.fail(f"WorkOS API failed HTTP {e.code}: {e.read().decode('utf-8', errors='replace')}")
+        md = body.get("metadata") or {}
+>       assert md.get(METADATA_KEY) == EFFECTIVE, (
+            f"Live API metadata[{METADATA_KEY!r}] = {md.get(METADATA_KEY)!r}, expected {EFFECTIVE!r}"
+        )
+E       AssertionError: Live API metadata['pochi_benchmark_marker'] = None, expected 'pochi-mv-zr-organization-metadata-update--5m8nzad'
+E       assert None == 'pochi-mv-zr-organization-metadata-update--5m8nzad'
+E        +  where None = <built-in method get of dict object at 0x786e92dd7100>('pochi_benchmark_marker')
+E        +    where <built-in method get of dict object at 0x786e92dd7100> = {}.get
+
+tests/test_final_state.py:50: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_env
+PASSED tests/test_final_state.py::test_script_exists
+FAILED tests/test_final_state.py::test_org_json_local - FileNotFoundError: [E...
+FAILED tests/test_final_state.py::test_workos_api_metadata - AssertionError: ...
+========================= 2 failed, 2 passed in 0.81s ==========================
