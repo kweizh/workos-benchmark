@@ -1,0 +1,42 @@
+# Assign the "admin" Role via WorkOS Organization Memberships
+
+## Background
+[WorkOS](https://workos.com/docs/user-management) User Management exposes a Role and Permission system where each user's relationship with an organization is represented by an `organization_membership` resource. Each membership has a `role` (with a `slug` such as `"member"` or `"admin"`) that drives downstream authorization decisions.
+
+In this task you will write a small Node.js automation script that uses the official WorkOS Node SDK to promote an existing organization membership to the `admin` role by calling the **Update an organization membership** API, then persist the resulting membership object to disk so it can be audited later.
+
+Reference docs:
+- [Update an organization membership](https://workos.com/docs/reference/user-management/organization-membership/update)
+- [Get an organization membership](https://workos.com/docs/reference/user-management/organization-membership/get)
+
+## Requirements
+- Create a Node.js project at `/home/user/myproject` (a `package.json` is already initialized for you and the `@workos-inc/node` SDK is already installed).
+- Implement a script `index.js` at `/home/user/myproject/index.js` that:
+  1. Reads the WorkOS API key from the `WORKOS_API_KEY` environment variable.
+  2. Reads the target organization membership id from the `WORKOS_ORG_MEMBERSHIP_ID` environment variable.
+  3. Instantiates a `WorkOS` client from `@workos-inc/node`.
+  4. Calls `workos.userManagement.updateOrganizationMembership(organizationMembershipId, { roleSlug: "admin" })` to assign the `"admin"` role.
+  5. Writes the **full membership object** returned by the API as pretty-printed JSON to `/home/user/myproject/result.json` (UTF-8, 2-space indentation).
+  6. Exits with status code `0` on success and a non-zero status on failure.
+- Run the script once so that `result.json` exists and the membership's role has actually been updated on WorkOS.
+
+## Implementation Guide
+1. `cd /home/user/myproject`
+2. Create `index.js` that:
+   - `const { WorkOS } = require('@workos-inc/node');`
+   - Reads `process.env.WORKOS_API_KEY` and `process.env.WORKOS_ORG_MEMBERSHIP_ID`.
+   - Constructs `const workos = new WorkOS(process.env.WORKOS_API_KEY);`.
+   - Awaits `workos.userManagement.updateOrganizationMembership(id, { roleSlug: 'admin' })`.
+   - Writes the returned membership object to `result.json` via `fs.writeFileSync`.
+3. Execute the script: `node index.js`.
+4. Confirm that `/home/user/myproject/result.json` was created and contains an object whose `role.slug` is `"admin"`.
+
+## Constraints
+- Project path: /home/user/myproject
+- Result file: /home/user/myproject/result.json
+- Use Node.js v24 and the official `@workos-inc/node` SDK only.
+- Do NOT mock or stub the WorkOS API. The script must hit the real WorkOS API using the provided `WORKOS_API_KEY` and `WORKOS_ORG_MEMBERSHIP_ID`.
+- Do NOT hardcode the API key or the membership id; both MUST be read from environment variables.
+
+## Integrations
+- WorkOS (User Management — Organization Memberships)

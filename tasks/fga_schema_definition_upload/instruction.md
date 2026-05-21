@@ -1,0 +1,115 @@
+# WorkOS FGA: Upload Resource Type Schema for Documents and Folders
+
+## Background
+WorkOS Fine-Grained Authorization (FGA) defines its authorization model through *resource types* — categories of entities (users, folders, documents, etc.) and the relations they support. The FGA REST API exposes endpoints under `/fga/v1/resource-types` for managing this schema; the `PUT /fga/v1/resource-types` endpoint performs a batch *apply* operation that sets the environment's set of resource types to match the provided list (equivalent to the Go SDK's `BatchUpdateResourceTypes`).
+
+Your job is to write a Node.js script that uses a real WorkOS API key to apply a schema containing three resource types — `user`, `folder`, and `document` — where `folder` permits a `parent` (self) relation plus a direct `viewer` relation, and `document` has a `parent` relation pointing at `folder` and a `viewer` relation that is *inherited* from `folder.viewer` via the `parent` relation. After applying the schema, the script must call the list endpoint and persist the full dump to disk for downstream verification.
+
+A pre-existing Node.js project lives at `/home/user/myproject` with the official `@workos-inc/node` SDK already installed (the SDK supplies `WorkOS` for constructing the client and gives convenient access to `process.env.WORKOS_API_KEY`). The current `@workos-inc/node` SDK does **not** expose a typed `fga.batchUpdateResourceTypes` / `fga.listResourceTypes` method, so you should call the FGA REST API directly using Node 24's built-in `fetch`, authenticating with the `Authorization: Bearer ${WORKOS_API_KEY}` header. You may still import and instantiate `WorkOS` if you want a quick sanity check that the key parses, but the actual schema upload and list MUST go through the REST endpoints below.
+
+## Requirements
+- Create a single Node.js script at `/home/user/myproject/index.js` that:
+  1. Loads `process.env.WORKOS_API_KEY` and fails fast with a non-zero exit code if it is missing.
+  2. Builds a JSON payload describing three resource types: `user`, `folder`, and `document`.
+     - `user`: no relations (object `{}`).
+     - `folder`:
+       - `parent`: a direct relation that allows other `folder` resources as the subject type.
+       - `viewer`: a direct relation that allows `user` as the subject type.
+     - `document`:
+       - `parent`: a direct relation that allows `folder` as the subject type.
+       - `viewer`: a relation that allows `user` as the subject type AND is inherited from the `viewer` relation of the parent `folder` (i.e., when a user is `viewer` of the folder, they implicitly become `viewer` of every document whose `parent` is that folder).
+  3. Calls `PUT https://api.workos.com/fga/v1/resource-types` with the JSON body `{ "resource_types": [ ... ] }`, the header `Content-Type: application/json`, and the header `Authorization: Bearer ${WORKOS_API_KEY}`. Treat any non-2xx response as a hard failure (print the response status and body, exit non-zero).
+  4. Immediately afterwards, calls `GET https://api.workos.com/fga/v1/resource-types?limit=100` with the same `Authorization` header to fetch the resulting schema dump.
+  5. Writes the parsed JSON response from the list endpoint to `/home/user/myproject/schema.json` using `JSON.stringify(..., null, 2)`. The file must be a valid JSON object whose `data` (or top-level) array contains entries for both `folder` and `document` (in addition to any other types already in the environment).
+  6. Logs progress and exits with code `0` on success.
+- Run the script exactly once with `node index.js` from `/home/user/myproject` so that `schema.json` is produced.
+
+## Implementation Guide
+1. `cd /home/user/myproject`.
+2. Inspect the existing `package.json` and `node_modules/@workos-inc/node` to confirm the SDK is already installed. Do not change versions.
+3. Author `index.js`. A reference shape:
+   ```js
+   // index.js
+   const fs = require('fs');
+   const { WorkOS } = require('@workos-inc/node');
+
+   const apiKey = process.env.WORKOS_API_KEY;
+   if (!apiKey) {
+     console.error('WORKOS_API_KEY env var is required');
+     process.exit(1);
+   }
+
+   // Construct the SDK client just to validate the key shape; the actual
+   // schema mutation goes through the REST endpoint because the Node SDK
+   // does not expose batchUpdateResourceTypes/listResourceTypes directly.
+   const workos = new WorkOS(apiKey);
+   void workos;
+
+   const resourceTypes = [
+     { type: 'user', relations: {} },
+     {
+       type: 'folder',
+       relations: {
+         parent: { allowed_types: ['folder'] },
+         viewer: { allowed_types: ['user'] },
+       },
+     },
+     {
+       type: 'document',
+       relations: {
+         parent: { allowed_types: ['folder'] },
+         viewer: {
+           allowed_types: ['user'],
+           inherit_if: 'viewer',
+           of_type: 'folder',
+           with_relation: 'parent',
+         },
+       },
+     },
+   ];
+
+   const baseUrl = 'https://api.workos.com';
+   const authHeaders = {
+     Authorization: `Bearer ${apiKey}`,
+     'Content-Type': 'application/json',
+     'User-Agent': 'workos-benchmark-fga-schema/1.0',
+   };
+
+   (async () => {
+     const putResp = await fetch(`${baseUrl}/fga/v1/resource-types`, {
+       method: 'PUT',
+       headers: authHeaders,
+       body: JSON.stringify({ resource_types: resourceTypes }),
+     });
+     if (!putResp.ok) {
+       console.error('PUT failed', putResp.status, await putResp.text());
+       process.exit(2);
+     }
+     console.log('Schema applied:', putResp.status);
+
+     const getResp = await fetch(`${baseUrl}/fga/v1/resource-types?limit=100`, {
+       method: 'GET',
+       headers: { Authorization: authHeaders.Authorization },
+     });
+     if (!getResp.ok) {
+       console.error('GET failed', getResp.status, await getResp.text());
+       process.exit(3);
+     }
+     const body = await getResp.json();
+     fs.writeFileSync('/home/user/myproject/schema.json', JSON.stringify(body, null, 2));
+     console.log('Wrote schema.json');
+   })();
+   ```
+4. Execute the script: `node index.js`. It must exit with code 0.
+5. After running, `/home/user/myproject/schema.json` must exist and contain at minimum entries for `folder` and `document` matching the shape described above.
+
+## Constraints
+- Project path: `/home/user/myproject`
+- Output file: `/home/user/myproject/schema.json` (the JSON dump returned by `GET /fga/v1/resource-types`)
+- Script entry point: `/home/user/myproject/index.js`
+- You MUST use the real WorkOS REST API via the `WORKOS_API_KEY` environment variable. NEVER mock, stub, or fake the HTTP responses.
+- The schema MUST contain `user`, `folder`, AND `document` resource types with the relations described above. Do NOT add unrelated resource types.
+- Do not delete or modify any files outside `/home/user/myproject`.
+
+## Integrations
+- WorkOS (Fine-Grained Authorization API)
