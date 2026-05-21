@@ -1,0 +1,44 @@
+[
+  {
+    "id": "invitation_01KS5Q8N3XNSXSSYAJF9MDNNJ2",
+    "email": "test-zr-user-invitation-creation--ikcgjjj@example.com",
+    "state": "pending",
+    "organization_id": "REDACTED"
+  },
+  {
+    "id": "invitation_01KS5PG1N37ZN0F2DX55H8CQPN",
+    "email": "pochi-invite-zr-invitation-revocation--xg9xwaf@pochi-benchmark.example",
+    "state": "revoked",
+    "organization_id": "REDACTED"
+  },
+  {
+    "id": "invitation_01KS5P9JZ6Y9GK7BMYEK4MZX34",
+    "email": "pochi-invite-zr-invitation-revocation--bojwgx4@pochi-benchmark.example",
+    "state": "revoked",
+    "organization_id": "REDACTED"
+  },
+  {
+    "id": "invitation_01KS50D7C3E2788BA437DM0T9H",
+    "email": "test-zr-user-invitation-creation--dos6f8v@example.com",
+    "state": "pending",
+    "organization_id": "REDACTED"
+  },
+  {
+    "id": "invitation_01KS4YN0RYZ7XGWKZVB50CK6JF",
+    "email": "test-zr-user-invitation-creation--jj49s75@example.com",
+    "state": "pending",
+    "organization_id": "REDACTED"
+  },
+  {
+    "id": "invitation_01KS4V1PHNW9KSGN79NA9ETCRS",
+    "email": "REDACTED",
+    "state": "pending",
+    "organization_id": "REDACTED"
+  },
+  {
+    "id": "invitation_01KRJZH5NBGW7M578MHJNVVDGV",
+    "email": "REDACTED",
+    "state": "revoked",
+    "organization_id": "REDACTED"
+  }
+]

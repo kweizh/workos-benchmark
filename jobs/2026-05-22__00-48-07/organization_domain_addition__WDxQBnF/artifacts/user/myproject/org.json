@@ -1,0 +1,21 @@
+{
+  "object": "organization",
+  "id": "org_01KS5Q6BRQ3J0R6TVT80GTHMVQ",
+  "name": "zr-organization-domain-addition--wdxqbnf-org",
+  "allowProfilesOutsideOrganization": false,
+  "domains": [
+    {
+      "object": "organization_domain",
+      "id": "org_domain_01KS5Q6BSHVK9D5D2HJGRK5KR1",
+      "domain": "zr-organization-domain-addition--wdxqbnf.REDACTED",
+      "organizationId": "org_01KS5Q6BRQ3J0R6TVT80GTHMVQ",
+      "state": "pending",
+      "createdAt": "2026-05-21T16:51:40.432Z",
+      "updatedAt": "2026-05-21T16:51:40.432Z"
+    }
+  ],
+  "createdAt": "2026-05-21T16:51:40.432Z",
+  "updatedAt": "2026-05-21T16:51:40.432Z",
+  "externalId": null,
+  "metadata": {}
+}

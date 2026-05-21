@@ -1,0 +1,95 @@
+Skipping image OS validation for hb__widgets_users_table_token: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-widgets-users-table-token--hpeygwf > /logs/artifacts/run-id && echo widgets_users_table_token__hPEygWF > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Generate a WorkOS Widget Token for the Users Table Widget
+
+## Background
+WorkOS Widgets are pre-built React components that let you embed enterprise admin flows (such as a users-management table) directly into your application. Each widget is rendered with a short-lived JWT token that must be generated on the backend with the WorkOS Node SDK. In this task you will create a small Node.js script that calls the WorkOS Widgets API and persists the returned token to a file.
+
+## Requirements
+- Initialize a Node.js project at `/home/user/myproject`.
+- Add `@workos-inc/node` as a dependency.
+- Create a script `generate_token.js` that:
+  1. Reads `WORKOS_API_KEY`, `WORKOS_ORGANIZATION_ID`, and `WORKOS_USER_ID` from the process environment.
+  2. Instantiates a `WorkOS` client.
+  3. Calls `workos.widgets.getToken({ organizationId, userId, scopes: ['widgets:users-table:manage'] })`.
+  4. Writes the returned JWT (the raw string contained in `token`) to `/home/user/myproject/widget_token.txt` with no extra whitespace, prefixes, JSON quoting, or trailing newline characters.
+- Run the script with `node generate_token.js` so that `widget_token.txt` exists and contains a valid widget token before the verifier runs.
+
+## Implementation Guide
+1. `mkdir -p /home/user/myproject && cd /home/user/myproject`.
+2. Run `npm init -y` and `npm install @workos-inc/node`.
+3. Create `generate_token.js` with the following structure:
+   ```js
+   const fs = require('fs');
+   const { WorkOS } = require('@workos-inc/node');
+
+   async function main() {
+     const workos = new WorkOS(process.env.WORKOS_API_KEY);
+     const { token } = await workos.widgets.getToken({
+       organizationId: process.env.WORKOS_ORGANIZATION_ID,
+       userId: process.env.WORKOS_USER_ID,
+       scopes: ['widgets:users-table:manage'],
+     });
+     fs.writeFileSync('/home/user/myproject/widget_token.txt', token);
+   }
+
+   main().catch((err) => { console.error(err); process.exit(1); });
+   ```
+4. Execute `node generate_token.js`.
+
+## Constraints
+- Project path: /home/user/myproject
+- Output file: /home/user/myproject/widget_token.txt
+- Use the real WorkOS Widgets API via `@workos-inc/node`. Do NOT mock the SDK or hand-craft a fake JWT.
+- Use Node.js v24 (already installed in the environment).
+- Required environment variables (provided to the container): `WORKOS_API_KEY`, `WORKOS_ORGANIZATION_ID`, `WORKOS_USER_ID`.
+
+## Integrations
+- WorkOS (Widgets API)
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured

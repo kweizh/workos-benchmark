@@ -1,0 +1,60 @@
+{
+    "id": "bded2152-7d8c-4a1b-96e1-2189c825fd6c",
+    "started_at": "2026-05-22T00:48:09.624369",
+    "updated_at": "2026-05-22T01:00:49.460522",
+    "finished_at": "2026-05-22T01:00:49.460522",
+    "n_total_trials": 20,
+    "stats": {
+        "n_completed_trials": 20,
+        "n_errored_trials": 0,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "pochi__claude-4-6-sonnet__tasks": {
+                "n_trials": 20,
+                "n_errors": 0,
+                "metrics": [
+                    {
+                        "mean": 0.8
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "audit_log_export_generation__CRpbCFt",
+                            "bulk_user_export_csv__o28UMz2",
+                            "mfa_totp_factor_enrollment__UzEVVza",
+                            "organization_membership_status_d__M7v5yNN",
+                            "passwordless_email_otp_authentic__atQpApa",
+                            "roles_creation_and_assignment__BbSBYTb",
+                            "user_invitation_creation__iKcGjJj",
+                            "widgets_users_table_token__hPEygWF",
+                            "admin_portal_dsync_link_generati__6vkrY6Y",
+                            "email_verification_send__FVZaMx4",
+                            "events_listing__ArdteZY",
+                            "invitation_revocation__28AjaMf",
+                            "organization_creation__zhTueQe",
+                            "organization_listing_pagination__H5XZdfA",
+                            "organization_memberships_listing__4tW9shf",
+                            "user_creation_with_password__UCh6WXy"
+                        ],
+                        "0.0": [
+                            "organization_domain_addition__WDxQBnF",
+                            "invitation_listing__fpiNUfm",
+                            "organization_external_id_update__q3MZitB",
+                            "organization_metadata_update__E2QamLm"
+                        ]
+                    }
+                },
+                "exception_stats": {}
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 403299,
+        "cost_usd": null
+    }
+}

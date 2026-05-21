@@ -1,0 +1,10 @@
+{
+  "name": "organization_memberships_listing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "List WorkOS organization memberships.",
+  "type": "commonjs",
+  "dependencies": {
+    "@workos-inc/node": "^7.0.0"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "myproject",
+  "version": "1.0.0",
+  "private": true,
+  "description": "WorkOS organization membership role assignment script.",
+  "main": "index.js",
+  "dependencies": {
+    "@workos-inc/node": "^7.0.0"
+  }
+}

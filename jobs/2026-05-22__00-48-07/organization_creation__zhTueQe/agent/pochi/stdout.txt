@@ -1,0 +1,38 @@
+- Initializing MCP connections...
+You
+# Create a New WorkOS Organization via the Node SDK ## Background WorkOS Organizations are the top-level tenant resource. In this task you will use the official `@workos-inc/node` SDK to create a brand new organization and persist the returned organization object to disk so other tooling can pick it up. ## Requirements 1. The project lives at `/home/user/myproject`. It already has `package.json` with `@workos-inc/node` installed. 2. Implement a script at `/home/user/myproject/create_org.js` that: - Reads `WORKOS_API_KEY` and `ZEALT_RUN_ID` from the process environment. - Initializes the WorkOS client: `const workos = new WorkOS(process.env.WORKOS_API_KEY)`. - Computes the organization name as `pochi-benchmark-org-${process.env.ZEALT_RUN_ID || 'default'}` (this guarantees the org name is unique per run and idempotent within a run). - Calls `workos.organizations.createOrganization({ name })` with that computed name. If WorkOS rejects the call because an organization with that name already exists, the script must fall back to looking the org up via `workos.organizations.listOrganizations({})` filtering by name, so re-runs remain idempotent. - Writes the JSON serialization (pretty-printed, 2-space indent) of the resulting organization to `/home/user/myproject/org.json`. 3. Run the script with `node create_org.js` so that `/home/user/myproject/org.json` exists. ## Implementation Guide 1. `cd /home/user/myproject` 2. Create `create_org.js` using `@workos-inc/node` per the description above. 3. Execute `node create_org.js`. 4. Confirm `/home/user/myproject/org.json` exists with the newly created organization's `id` and `name`. ## Constraints - Use the real WorkOS API. Do NOT mock the SDK or HTTP layer. - Do NOT hardcode the API key. - The organization id field returned by the SDK (`id`) must be a non-empty `org_*` string. ## Integrations - WorkOS (real API key via env var; org name is derived from ZEALT_RUN_ID).   
+
+Pochi
+💭 Thinking for 116 characters   
+📂 Listing files in /home/user/myproject ✔ 
+📖 Reading /home/user/myproject/package.json ✔ 
+✏️  Writing /home/user/myproject/create_org.js ✔ 
+💫 Executing cd /home/user/myproject && node create_org.js ✔ 
+📖 Reading /home/user/myproject/org.json ✔ 
+🎉 Task Completed
+The script `/home/user/myproject/create_org.js` has been created and executed successfully.
+
+**What was implemented:**
+- Reads `WORKOS_API_KEY` and `ZEALT_RUN_ID` from the environment
+- Initializes the WorkOS client with the API key
+- Computes the org name as `pochi-benchmark-org-${ZEALT_RUN_ID || 'default'}`
+- Calls `workos.organizations.createOrganization({ name })` and falls back to listing/filtering by name if the org already exists (handles 422 / "already exists" errors with pagination support)
+- Writes the pretty-printed JSON result to `/home/user/myproject/org.json`
+
+**Result in `org.json`:**
+```json
+{
+  "object": "organization",
+  "id": "org_01KS5QF43Z9929JC588T32GN6J",
+  "name": "pochi-benchmark-org-zr-organization-creation--zhtueqe",
+  "allowProfilesOutsideOrganization": false,
+  "domains": [],
+  "createdAt": "2026-05-21T16:56:27.512Z",
+  "updatedAt": "2026-05-21T16:56:27.512Z",
+  "externalId": null,
+  "metadata": {}
+}
+```
+
+The organization ID `org_01KS5QF43Z9929JC588T32GN6J` confirms a successful creation via the real WorkOS API.   
+  
