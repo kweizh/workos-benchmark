@@ -18,15 +18,12 @@
 *   **Admin Portal**: A self-service UI for your customers to configure their own SSO and Directory Sync.
     *   [Documentation](https://workos.com/docs/admin-portal)
     *   `workos.portal.generateLink({ organization, intent: 'sso' })`
-*   **Fine-Grained Authorization (FGA)**: Relationship-based access control (ReBAC) for resource-level permissions.
-    *   [Documentation](https://workos.com/docs/fga)
-    *   `workos.authorization.check({ organizationMembershipId, permissionSlug, resourceId, resourceTypeSlug })`
+*   **Fine-Grained Authorization (FGA)**: Relationship-based access control (ReBAC) for resource-level permissions, is sunset on November 15th, 2025.
 *   **Pipes**: A unified API to connect to third-party data providers (GitHub, Slack, Salesforce) without managing OAuth flows.
     *   [Documentation](https://workos.com/docs/pipes)
     *   `workos.pipes.getAccessToken({ provider, userId })`
 ### 3. Real-World Use Cases & Templates
 *   **Next.js AuthKit Example**: [GitHub Repo](https://github.com/workos/next-authkit-example) - Demonstrates full-stack authentication in a Next.js App Router environment.
-*   **FGA Row-Level Security**: [GitHub Repo](https://github.com/workos/fga-row-level-access-control-postgres) - Shows how to use FGA with Postgres for granular permissions in a ticketing system.
 *   **RAG Security with FGA**: [Blog/Code](https://workos.com/blog/how-to-secure-rag-applications-with-fine-grained-authorization-tutorial-with-code) - Example of securing vector search results in AI applications.
 ### 4. Developer Friction Points
 *   **Webhook Verification**: Correctly validating signatures for Directory Sync events can be tricky, especially in serverless environments where raw body access is required. [Issue Example](https://github.com/workos/workos-node/issues/520)
@@ -37,7 +34,6 @@
 *   **SSO Organization Mapping**: Create a flow that automatically assigns users to a specific WorkOS organization based on their email domain during login.
 *   **Directory Sync Webhooks**: Build a webhook handler that synchronizes user status (active/suspended) from WorkOS to a local PostgreSQL database.
 *   **Self-Service Admin Portal**: Implement a "Settings" page where organization admins can generate a secure link to configure their own SAML connection.
-*   **FGA Document Permissions**: Model a "Document Sharing" system with 'owner', 'editor', and 'viewer' roles where permissions are inherited across a folder hierarchy.
 *   **Pipes Data Integration**: Develop a feature that uses WorkOS Pipes to fetch and display a user's GitHub repositories.
 *   **Step-up MFA**: Implement a security-sensitive route that requires a user to complete an MFA challenge (TOTP or SMS) even if they are already logged in.
 *   **Audit Log Recording**: Integrate the Audit Logs API to record and categorize administrative actions like "Organization Deleted" or "Permission Changed."
@@ -46,6 +42,5 @@
 2.  [WorkOS llms.txt](https://workos.com/llms.txt) - Structured overview of the documentation.
 3.  [WorkOS Node.js SDK](https://github.com/workos/workos-node) - Official SDK source code and examples.
 4.  [WorkOS CLI Documentation](https://workos.com/docs/authkit/cli-installer) - Details on the AI-powered installer.
-5.  [WorkOS FGA Row-Level Security Example](https://github.com/workos/fga-row-level-access-control-postgres) - Real-world implementation pattern.
-6.  [WorkOS Pipes Announcement](https://workos.com/changelog/pipes) - Overview of the third-party integration product.
-7.  [G2 WorkOS Reviews](https://www.g2.com/products/workos/reviews) - Source for developer friction points and common complaints.
+5.  [WorkOS Pipes Announcement](https://workos.com/changelog/pipes) - Overview of the third-party integration product.
+6.  [G2 WorkOS Reviews](https://www.g2.com/products/workos/reviews) - Source for developer friction points and common complaints.
