@@ -1,0 +1,105 @@
+downloading uv 0.9.7 x86_64-unknown-linux-gnu
+no checksums to verify
+installing to /root/.local/bin
+  uv
+  uvx
+everything's installed!
+
+To add $HOME/.local/bin to your PATH, either restart your shell or run:
+
+    source $HOME/.local/bin/env (sh, bash, zsh)
+    source $HOME/.local/bin/env.fish (fish)
+Downloading pygments (1.2MiB)
+ Downloading pygments
+Installed 7 packages in 89ms
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 5 items
+
+tests/test_final_state.py .FFFF                                          [100%]
+
+=================================== FAILURES ===================================
+_________________ test_users_csv_has_trailing_newline_and_utf8 _________________
+
+    def test_users_csv_has_trailing_newline_and_utf8():
+>       with open(USERS_CSV, "rb") as f:
+             ^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/user/myproject/users.csv'
+
+tests/test_final_state.py:109: FileNotFoundError
+________________________ test_users_csv_header_is_exact ________________________
+
+    def test_users_csv_header_is_exact():
+>       rows = _parse_csv_rows()
+               ^^^^^^^^^^^^^^^^^
+
+tests/test_final_state.py:122: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_final_state.py:25: in _parse_csv_rows
+    text = _read_csv_text()
+           ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_csv_text():
+>       assert os.path.isfile(USERS_CSV), f"Expected output file {USERS_CSV} does not exist."
+E       AssertionError: Expected output file /home/user/myproject/users.csv does not exist.
+E       assert False
+E        +  where False = <function isfile at 0x75e941b88220>('/home/user/myproject/users.csv')
+E        +    where <function isfile at 0x75e941b88220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:17: AssertionError
+____________________ test_users_csv_rows_have_five_columns _____________________
+
+    def test_users_csv_rows_have_five_columns():
+>       rows = _parse_csv_rows()
+               ^^^^^^^^^^^^^^^^^
+
+tests/test_final_state.py:129: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_final_state.py:25: in _parse_csv_rows
+    text = _read_csv_text()
+           ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_csv_text():
+>       assert os.path.isfile(USERS_CSV), f"Expected output file {USERS_CSV} does not exist."
+E       AssertionError: Expected output file /home/user/myproject/users.csv does not exist.
+E       assert False
+E        +  where False = <function isfile at 0x75e941b88220>('/home/user/myproject/users.csv')
+E        +    where <function isfile at 0x75e941b88220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:17: AssertionError
+____________________ test_users_csv_matches_live_workos_api ____________________
+
+    def test_users_csv_matches_live_workos_api():
+>       rows = _parse_csv_rows()
+               ^^^^^^^^^^^^^^^^^
+
+tests/test_final_state.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_final_state.py:25: in _parse_csv_rows
+    text = _read_csv_text()
+           ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_csv_text():
+>       assert os.path.isfile(USERS_CSV), f"Expected output file {USERS_CSV} does not exist."
+E       AssertionError: Expected output file /home/user/myproject/users.csv does not exist.
+E       assert False
+E        +  where False = <function isfile at 0x75e941b88220>('/home/user/myproject/users.csv')
+E        +    where <function isfile at 0x75e941b88220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:17: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_index_js_exists_and_uses_workos_sdk
+FAILED tests/test_final_state.py::test_users_csv_has_trailing_newline_and_utf8
+FAILED tests/test_final_state.py::test_users_csv_header_is_exact - AssertionE...
+FAILED tests/test_final_state.py::test_users_csv_rows_have_five_columns - Ass...
+FAILED tests/test_final_state.py::test_users_csv_matches_live_workos_api - As...
+========================= 4 failed, 1 passed in 0.05s ==========================

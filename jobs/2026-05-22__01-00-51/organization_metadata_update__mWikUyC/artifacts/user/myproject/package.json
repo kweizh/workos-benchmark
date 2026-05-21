@@ -1,0 +1,10 @@
+{
+  "name": "organization_metadata_update",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Set a metadata key on a WorkOS organization.",
+  "type": "commonjs",
+  "dependencies": {
+    "@workos-inc/node": "^7.0.0"
+  }
+}

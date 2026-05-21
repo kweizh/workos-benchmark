@@ -1,0 +1,83 @@
+Skipping image OS validation for hb__user_invitation_creation: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-user-invitation-creation--7lpkbvj > /logs/artifacts/run-id && echo user_invitation_creation__7LpKBvJ > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Send a WorkOS User Invitation to an Organization
+
+## Background
+A B2B SaaS application uses [WorkOS User Management](https://workos.com/docs/user-management/invitations) to onboard customers' teammates into their organizations. The growth team wants a small command-line utility that issues an organization-scoped invitation and records the resulting invitation `id` and `token` to disk so that the rest of the onboarding pipeline can pick it up.
+
+Your job is to write a small Node.js script that uses the official `@workos-inc/node` SDK to call `workos.userManagement.sendInvitation(...)` and persist the returned `id` and `token` to a JSON file.
+
+## Requirements
+- Create a Node.js script at `/home/user/myproject/send_invitation.js`.
+- Initialize the WorkOS client using the `WORKOS_API_KEY` environment variable. Do NOT hardcode the API key.
+- Read the target organization id from the `WORKOS_ORGANIZATION_ID` environment variable and construct the recipient email using the `ZEALT_RUN_ID` environment variable (e.g. `test-${process.env.ZEALT_RUN_ID}@example.com`). Do NOT hardcode the organization ID.
+- Call `await workos.userManagement.sendInvitation({ email: \`test-${process.env.ZEALT_RUN_ID}@example.com\`, organizationId: process.env.WORKOS_ORGANIZATION_ID })` from the official `@workos-inc/node` SDK.
+- Write the resulting invitation `id` and `token` to `/home/user/myproject/invitation.json` as a JSON object with exactly the keys `id` and `token` (string values). For example: `{"id": "invitation_01...", "token": "..."}`.
+- Run the script once so that `invitation.json` is written before the task completes.
+
+## Implementation Guide
+1. The directory `/home/user/myproject` already exists and has `@workos-inc/node` installed as a dependency (see `package.json`).
+2. Inside that directory, create `send_invitation.js` that:
+   - Imports `WorkOS` from `@workos-inc/node`.
+   - Constructs the client as `new WorkOS(process.env.WORKOS_API_KEY)`.
+   - Calls `await workos.userManagement.sendInvitation({ email: \`test-${process.env.ZEALT_RUN_ID}@example.com\`, organizationId: process.env.WORKOS_ORGANIZATION_ID })`.
+   - Writes `{ id: invitation.id, token: invitation.token }` to `invitation.json` using `JSON.stringify`.
+3. Execute the script with `node send_invitation.js` from `/home/user/myproject` so the output file is produced.
+
+## Constraints
+- Project path: `/home/user/myproject`
+- Script path: `/home/user/myproject/send_invitation.js`
+- Output file: `/home/user/myproject/invitation.json`
+- Use the `@workos-inc/node` SDK (already installed).
+- Use the real WorkOS API; do NOT mock the SDK.
+- Read credentials and inputs from environment variables only.
+
+## Integrations
+- WorkOS (User Management / Invitations). Requires `WORKOS_API_KEY`, `WORKOS_ORGANIZATION_ID`, and `ZEALT_RUN_ID`.
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured

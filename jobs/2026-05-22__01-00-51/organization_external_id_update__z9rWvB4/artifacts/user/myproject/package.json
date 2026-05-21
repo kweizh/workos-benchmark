@@ -1,0 +1,10 @@
+{
+  "name": "organization_external_id_update",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Update WorkOS organization external_id.",
+  "type": "commonjs",
+  "dependencies": {
+    "@workos-inc/node": "^7.0.0"
+  }
+}

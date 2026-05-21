@@ -1,0 +1,30 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0
+collected 4 items
+
+tests/test_final_state.py ..F.                                           [100%]
+
+=================================== FAILURES ===================================
+_______________________________ test_local_shape _______________________________
+
+    def test_local_shape():
+        with open(OUT_PATH) as f:
+            data = json.load(f)
+        assert isinstance(data, list)
+        for entry in data:
+            assert set(entry.keys()) == REQUIRED
+>           assert entry["organization_id"] == WORKOS_ORGANIZATION_ID
+E           AssertionError: assert 'undefined' == 'org_01KPZNPF...RW1VGS6E1S9EG'
+E             - REDACTED
+E             + undefined
+
+tests/test_final_state.py:58: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_env
+PASSED tests/test_final_state.py::test_script_exists
+PASSED tests/test_final_state.py::test_ids_match_live
+FAILED tests/test_final_state.py::test_local_shape - AssertionError: assert '...
+========================= 1 failed, 3 passed in 0.73s ==========================

@@ -1,0 +1,10 @@
+{
+  "name": "invitation_revocation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Send a WorkOS invitation then revoke it.",
+  "type": "commonjs",
+  "dependencies": {
+    "@workos-inc/node": "^7.0.0"
+  }
+}

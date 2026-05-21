@@ -1,0 +1,16 @@
+{
+  "object": "invitation",
+  "id": "invitation_01KS5R6F2XCW0M8AK473PVKWCQ",
+  "email": "pochi-invite-zr-invitation-revocation--sayn6bh@pochi-benchmark.example",
+  "state": "revoked",
+  "acceptedAt": null,
+  "revokedAt": "2026-05-21T17:09:13.246Z",
+  "expiresAt": "2026-05-28T17:09:12.413Z",
+  "organizationId": "REDACTED",
+  "inviterUserId": null,
+  "acceptedUserId": null,
+  "token": "VIpYiAGe28EKT7fPCFq356MZJ",
+  "acceptInvitationUrl": "https://original-register-63-staging.authkit.app/invite?invitation_token=VIpYiAGe28EKT7fPCFq356MZJ&client_id=REDACTED",
+  "createdAt": "2026-05-21T17:09:12.320Z",
+  "updatedAt": "2026-05-21T17:09:13.244Z"
+}

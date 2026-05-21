@@ -1,0 +1,10 @@
+{
+  "name": "email_verification_send",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Send a verification email to an existing WorkOS user.",
+  "type": "commonjs",
+  "dependencies": {
+    "@workos-inc/node": "^7.0.0"
+  }
+}

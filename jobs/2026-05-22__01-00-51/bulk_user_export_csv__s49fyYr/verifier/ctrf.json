@@ -1,0 +1,77 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 5,
+            "passed": 1,
+            "failed": 4,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779382964.810889,
+            "stop": 1779382964.8625038
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_index_js_exists_and_uses_workos_sdk",
+                "status": "passed",
+                "duration": 0.0005234470590949059,
+                "start": 1779382964.8288453,
+                "stop": 1779382964.829579,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_users_csv_has_trailing_newline_and_utf8",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.00047310907393693924,
+                "start": 1779382964.829771,
+                "stop": 1779382964.8451297,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_users_csv_has_trailing_newline_and_utf8():\n>       with open(USERS_CSV, \"rb\") as f:\n             ^^^^^^^^^^^^^^^^^^^^^\nE       FileNotFoundError: [Errno 2] No such file or directory: '/home/user/myproject/users.csv'\n\ntests/test_final_state.py:109: FileNotFoundError",
+                "message": "The test failed in the call phase"
+            },
+            {
+                "name": "test_final_state.py::test_users_csv_header_is_exact",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0005546570755541325,
+                "start": 1779382964.8453453,
+                "stop": 1779382964.8506823,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_users_csv_header_is_exact():\n>       rows = _parse_csv_rows()\n               ^^^^^^^^^^^^^^^^^\n\ntests/test_final_state.py:122: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_final_state.py:25: in _parse_csv_rows\n    text = _read_csv_text()\n           ^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_csv_text():\n>       assert os.path.isfile(USERS_CSV), f\"Expected output file {USERS_CSV} does not exist.\"\nE       AssertionError: Expected output file /home/user/myproject/users.csv does not exist.\nE       assert False\nE        +  where False = <function isfile at 0x75e941b88220>('/home/user/myproject/users.csv')\nE        +    where <function isfile at 0x75e941b88220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:17: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_users_csv_rows_have_five_columns",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0005600969307124615,
+                "start": 1779382964.8508952,
+                "stop": 1779382964.856278,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_users_csv_rows_have_five_columns():\n>       rows = _parse_csv_rows()\n               ^^^^^^^^^^^^^^^^^\n\ntests/test_final_state.py:129: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_final_state.py:25: in _parse_csv_rows\n    text = _read_csv_text()\n           ^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_csv_text():\n>       assert os.path.isfile(USERS_CSV), f\"Expected output file {USERS_CSV} does not exist.\"\nE       AssertionError: Expected output file /home/user/myproject/users.csv does not exist.\nE       assert False\nE        +  where False = <function isfile at 0x75e941b88220>('/home/user/myproject/users.csv')\nE        +    where <function isfile at 0x75e941b88220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:17: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_users_csv_matches_live_workos_api",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0005322643555700779,
+                "start": 1779382964.8564603,
+                "stop": 1779382964.8623278,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_users_csv_matches_live_workos_api():\n>       rows = _parse_csv_rows()\n               ^^^^^^^^^^^^^^^^^\n\ntests/test_final_state.py:137: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_final_state.py:25: in _parse_csv_rows\n    text = _read_csv_text()\n           ^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_csv_text():\n>       assert os.path.isfile(USERS_CSV), f\"Expected output file {USERS_CSV} does not exist.\"\nE       AssertionError: Expected output file /home/user/myproject/users.csv does not exist.\nE       assert False\nE        +  where False = <function isfile at 0x75e941b88220>('/home/user/myproject/users.csv')\nE        +    where <function isfile at 0x75e941b88220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:17: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

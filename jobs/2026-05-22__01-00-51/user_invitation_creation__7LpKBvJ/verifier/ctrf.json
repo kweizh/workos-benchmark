@@ -1,0 +1,65 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 5,
+            "passed": 5,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779383134.3576028,
+            "stop": 1779383135.2104933
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_script_exists",
+                "status": "passed",
+                "duration": 0.0004843831993639469,
+                "start": 1779383134.4002814,
+                "stop": 1779383134.4009726,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_output_file_exists",
+                "status": "passed",
+                "duration": 0.00042860209941864014,
+                "start": 1779383134.4011736,
+                "stop": 1779383134.4017344,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_script_uses_real_workos_sdk",
+                "status": "passed",
+                "duration": 0.0004117647185921669,
+                "start": 1779383134.4019043,
+                "stop": 1779383134.4024405,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_invitation_json_shape",
+                "status": "passed",
+                "duration": 0.0004213796928524971,
+                "start": 1779383134.4026093,
+                "stop": 1779383134.403155,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_invitation_matches_workos_api",
+                "status": "passed",
+                "duration": 0.806744231376797,
+                "start": 1779383134.4033656,
+                "stop": 1779383135.2102876,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}
